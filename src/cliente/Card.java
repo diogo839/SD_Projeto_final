@@ -1,4 +1,4 @@
-package programas;
+package cliente;
 
 public class Card {
    private String name;  // nomes das carta (mesmo nome do ficheiro .png)
