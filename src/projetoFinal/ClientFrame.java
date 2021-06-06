@@ -1,12 +1,20 @@
-package cliente;
+package projetoFinal;
 
+import cliente.Card;
+import cliente.CardLabel;
+import cliente.Deck;
+import java.awt.Container;
+import java.awt.Label;
 import javax.swing.*;
 import java.awt.event.*;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import projetoFinal.Cliente;
+import projetoFinal.LoginCliente;
 
 public class ClientFrame extends JFrame {
 
@@ -14,15 +22,17 @@ public class ClientFrame extends JFrame {
     private CardLabel cardLabel;
     private Deck gameDeck;
     private Cliente cliente;
+    private LoginCliente user;
+    Vector<LoginCliente> lista;
 
     public ClientFrame() {
 
         initComponents();
-
+        lista=new Vector<LoginCliente>();
         this.LoginPanel.setVisible(true);
         System.out.println(this.LoginPanel);
         this.TablePanel.setVisible(false);
-
+            
         gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();            // embaralha
 
@@ -138,7 +148,11 @@ public class ClientFrame extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textField1 = new java.awt.TextField();
+        textField2 = new java.awt.TextField();
         TablePanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaJogador = new javax.swing.JList<>();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -147,6 +161,14 @@ public class ClientFrame extends JFrame {
         portoTextField = new javax.swing.JTextField();
         nomeTextField = new javax.swing.JTextField();
         JbuttonEntrar = new javax.swing.JButton();
+        sair = new java.awt.Button();
+        label1 = new java.awt.Label("");
+        label2 = new java.awt.Label();
+        label3 = new java.awt.Label();
+
+        textField1.setText("textField1");
+
+        textField2.setText("textField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Card Game GUI");
@@ -156,18 +178,7 @@ public class ClientFrame extends JFrame {
 
         TablePanel.setBackground(new java.awt.Color(0, 153, 0));
 
-        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
-        TablePanel.setLayout(TablePanelLayout);
-        TablePanelLayout.setHorizontalGroup(
-            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        TablePanelLayout.setVerticalGroup(
-            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(TablePanel, "card2");
+        jScrollPane1.setViewportView(listaJogador);
 
         LoginPanel.setEnabled(false);
 
@@ -199,7 +210,7 @@ public class ClientFrame extends JFrame {
                     .addComponent(portoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JbuttonEntrar)
@@ -222,14 +233,83 @@ public class ClientFrame extends JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(JbuttonEntrar)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
-        getContentPane().add(LoginPanel, "card3");
+        sair.setLabel("sair");
+        sair.setLabel("sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
+
+        label1.setText("label1");
+
+        label2.setText("label2");
+
+        label3.setText("label3");
+
+        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
+        TablePanel.setLayout(TablePanelLayout);
+        TablePanelLayout.setHorizontalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(LoginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGap(227, 227, 227)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(254, 254, 254)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(360, 360, 360)
+                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 438, Short.MAX_VALUE))
+        );
+        TablePanelLayout.setVerticalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(LoginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(122, 122, 122))
+        );
+
         LoginPanel.getAccessibleContext().setAccessibleName("LoginPanel");
+
+        getContentPane().add(TablePanel, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        try {
+            cliente.logout();
+            System.exit(0);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sairActionPerformed
 
     private void JbuttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbuttonEntrarActionPerformed
         String ip = this.ipTextField.getText();
@@ -237,14 +317,13 @@ public class ClientFrame extends JFrame {
         String nome = this.nomeTextField.getText();
         boolean entrar = true;
         int porto = 0;
-        
+
         try{
-                  cliente = new Cliente();
+            cliente = new Cliente();
         }catch(RemoteException e){
-             mensagemErro("Houve um erro!!");
-            
+            mensagemErro("Houve um erro!!");
+
         }
-  
 
         if (ip.equalsIgnoreCase("")) {
             mensagemErro("Introduza o ip!!");
@@ -264,14 +343,14 @@ public class ClientFrame extends JFrame {
         }
 
         String zeroTo255
-                = "(\\d{1,2}|(0|1)\\"
-                + "d{2}|2[0-4]\\d|25[0-5])";
-   
+        = "(\\d{1,2}|(0|1)\\"
+        + "d{2}|2[0-4]\\d|25[0-5])";
+
         String regex
-                = zeroTo255 + "\\."
-                + zeroTo255 + "\\."
-                + zeroTo255 + "\\."
-                + zeroTo255;
+        = zeroTo255 + "\\."
+        + zeroTo255 + "\\."
+        + zeroTo255 + "\\."
+        + zeroTo255;
 
         Pattern p = Pattern.compile(regex);
 
@@ -284,35 +363,34 @@ public class ClientFrame extends JFrame {
             entrar = false;
 
         }
-        
-          m = Pattern.compile("\\d{0,5}").matcher(portoString);
-       
+
+        m = Pattern.compile("\\d{0,5}").matcher(portoString);
+
         if (!m.matches()) {
-             mensagemErro("O porto não é válido!!\nVolte a Introduzir.");
+            mensagemErro("O porto não é válido!!\nVolte a Introduzir.");
             entrar = false;
-           
+
         }
-        
+
         try {
             porto = Integer.parseInt(portoString);
         } catch (NumberFormatException e) {
             entrar = false;
         }
-        
-        
+
         if (entrar) {
-            
-       
+
             cliente.login(nome, ip, porto);
+            
             this.LoginPanel.setVisible(false);
             this.TablePanel.setVisible(true);
-        }
 
+        }
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
+  
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -329,8 +407,52 @@ public class ClientFrame extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    java.awt.Label label1;
+    private java.awt.Label label2;
+    private java.awt.Label label3;
+    private static javax.swing.JList<String> listaJogador;
     private javax.swing.JTextField nomeTextField;
     private javax.swing.JTextField portoTextField;
+    private java.awt.Button sair;
+    private java.awt.TextField textField1;
+    private java.awt.TextField textField2;
     // End of variables declaration//GEN-END:variables
 
+    
+ 
+    
+    public void listar( LoginCliente[] lista){
+     
+     
+        DefaultListModel listModel = new DefaultListModel();
+        
+        for(int i=0 ;i<lista.length;i++){
+             System.out.println(lista[i].getNome()+" "+i);
+            switch(i){
+                case 0:   
+                    
+                   label1.setText(lista[i].getNome());
+                   label1.repaint();
+
+                    break;
+                    case 1:
+                  this.label2.setText(lista[i].getNome());
+                
+                    break;
+                    case 2:
+                   label3.setText(lista[i].getNome());
+                  
+                    break;
+                    default:
+                        listModel.addElement(lista[i].getNome());
+                
+                
+            }
+            
+        }
+
+        listaJogador.setModel(listModel);
+        
+    }
 }
