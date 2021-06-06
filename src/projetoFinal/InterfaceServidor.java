@@ -7,6 +7,7 @@ package projetoFinal;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface InterfaceServidor extends Remote{
     
-     public boolean login(String nome, InterfaceCliente clinte) throws RemoteException;
-    
+     public LoginCliente login(String nome, InterfaceCliente clinte) throws RemoteException;
+     public LoginCliente[] getJogadores()throws RemoteException;
+     public void logout(String nome, InterfaceCliente iCliente) throws RemoteException;
 }
