@@ -24,20 +24,23 @@ public class ClientFrame extends JFrame {
     private Cliente cliente;
     private LoginCliente user;
     Vector<LoginCliente> lista;
+    private DefaultListModel listMensagem;
+     private Vector<LoginCliente> listaTresJogadores;
+
+     private int jogador;
 
     public ClientFrame() {
 
         initComponents();
-        lista=new Vector<LoginCliente>();
+        lista = new Vector<LoginCliente>();
         this.LoginPanel.setVisible(true);
-        System.out.println(this.LoginPanel);
         this.TablePanel.setVisible(false);
-            
+        this.listMensagem = new DefaultListModel();
+        listaTresJogadores = new Vector<LoginCliente>();
         gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();            // embaralha
 
-        drawHand();
-
+        //drawHand();
         drawBlackjack();
 
     }
@@ -153,6 +156,20 @@ public class ClientFrame extends JFrame {
         TablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaJogador = new javax.swing.JList<>();
+        sair = new java.awt.Button();
+        label1 = new java.awt.Label("");
+        label2 = new java.awt.Label();
+        label3 = new java.awt.Label();
+        jLabel4 = new javax.swing.JLabel();
+        JScrollPane2 = new javax.swing.JScrollPane();
+        listaMensagem = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        hitJogador2 = new javax.swing.JButton();
+        hitJogador1 = new javax.swing.JButton();
+        hitJogador3 = new javax.swing.JButton();
+        standJogador3 = new javax.swing.JButton();
+        standJogador2 = new javax.swing.JButton();
+        standJogador1 = new javax.swing.JButton();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -161,10 +178,6 @@ public class ClientFrame extends JFrame {
         portoTextField = new javax.swing.JTextField();
         nomeTextField = new javax.swing.JTextField();
         JbuttonEntrar = new javax.swing.JButton();
-        sair = new java.awt.Button();
-        label1 = new java.awt.Label("");
-        label2 = new java.awt.Label();
-        label3 = new java.awt.Label();
 
         textField1.setText("textField1");
 
@@ -179,6 +192,148 @@ public class ClientFrame extends JFrame {
         TablePanel.setBackground(new java.awt.Color(0, 153, 0));
 
         jScrollPane1.setViewportView(listaJogador);
+
+        sair.setLabel("sair");
+        sair.setLabel("sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
+
+        label1.setAlignment(java.awt.Label.CENTER);
+        label1.setText("label1");
+
+        label2.setAlignment(java.awt.Label.CENTER);
+
+        label3.setAlignment(java.awt.Label.CENTER);
+
+        jLabel4.setText("Observadores");
+
+        JScrollPane2.setViewportView(listaMensagem);
+
+        jLabel5.setText("Mensagens");
+
+        hitJogador2.setText("Hit");
+        hitJogador2.setEnabled(false);
+
+        hitJogador1.setText("Hit");
+        hitJogador1.setEnabled(false);
+
+        hitJogador3.setText("Hit");
+        hitJogador3.setEnabled(false);
+
+        standJogador3.setText("Stand");
+        standJogador3.setEnabled(false);
+        standJogador3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standJogador3ActionPerformed(evt);
+            }
+        });
+
+        standJogador2.setText("Stand");
+        standJogador2.setEnabled(false);
+        standJogador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standJogador2ActionPerformed(evt);
+            }
+        });
+
+        standJogador1.setText("Stand");
+        standJogador1.setEnabled(false);
+        standJogador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standJogador1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
+        TablePanel.setLayout(TablePanelLayout);
+        TablePanelLayout.setHorizontalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGap(519, 519, 519)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(JScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(36, 36, 36))
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(hitJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(standJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 333, Short.MAX_VALUE))))
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(80, 80, 80))))
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(hitJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(standJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(hitJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(standJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(140, 140, 140)
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(149, 149, 149)
+                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        TablePanelLayout.setVerticalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hitJogador1)
+                            .addComponent(standJogador1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hitJogador2)
+                            .addComponent(standJogador2)
+                            .addComponent(hitJogador3)
+                            .addComponent(standJogador3))
+                        .addGap(25, 25, 25))))
+        );
+
+        getContentPane().add(TablePanel, "card2");
 
         LoginPanel.setEnabled(false);
 
@@ -200,21 +355,22 @@ public class ClientFrame extends JFrame {
         LoginPanelLayout.setHorizontalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPanelLayout.createSequentialGroup()
-                .addGap(249, 249, 249)
-                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(36, 36, 36)
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(portoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(233, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JbuttonEntrar)
-                .addGap(288, 288, 288))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(36, 36, 36)
+                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(portoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addComponent(JbuttonEntrar)))
+                .addContainerGap(639, Short.MAX_VALUE))
         );
         LoginPanelLayout.setVerticalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,71 +389,11 @@ public class ClientFrame extends JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(JbuttonEntrar)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
 
-        sair.setLabel("sair");
-        sair.setLabel("sair");
-        sair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairActionPerformed(evt);
-            }
-        });
-
-        label1.setText("label1");
-
-        label2.setText("label2");
-
-        label3.setText("label3");
-
-        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
-        TablePanel.setLayout(TablePanelLayout);
-        TablePanelLayout.setHorizontalGroup(
-            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(LoginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(254, 254, 254)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(360, 360, 360)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 438, Short.MAX_VALUE))
-        );
-        TablePanelLayout.setVerticalGroup(
-            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)
-                                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(LoginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(122, 122, 122))
-        );
-
+        getContentPane().add(LoginPanel, "card3");
         LoginPanel.getAccessibleContext().setAccessibleName("LoginPanel");
-
-        getContentPane().add(TablePanel, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -318,9 +414,9 @@ public class ClientFrame extends JFrame {
         boolean entrar = true;
         int porto = 0;
 
-        try{
-            cliente = new Cliente();
-        }catch(RemoteException e){
+        try {
+            cliente = new Cliente(this);
+        } catch (RemoteException e) {
             mensagemErro("Houve um erro!!");
 
         }
@@ -343,14 +439,14 @@ public class ClientFrame extends JFrame {
         }
 
         String zeroTo255
-        = "(\\d{1,2}|(0|1)\\"
-        + "d{2}|2[0-4]\\d|25[0-5])";
+                = "(\\d{1,2}|(0|1)\\"
+                + "d{2}|2[0-4]\\d|25[0-5])";
 
         String regex
-        = zeroTo255 + "\\."
-        + zeroTo255 + "\\."
-        + zeroTo255 + "\\."
-        + zeroTo255;
+                = zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255;
 
         Pattern p = Pattern.compile(regex);
 
@@ -381,16 +477,25 @@ public class ClientFrame extends JFrame {
         if (entrar) {
 
             cliente.login(nome, ip, porto);
-            
+
             this.LoginPanel.setVisible(false);
             this.TablePanel.setVisible(true);
 
         }
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
 
-   
-  
-    
+    private void standJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_standJogador3ActionPerformed
+
+    private void standJogador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_standJogador2ActionPerformed
+
+    private void standJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_standJogador1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -400,59 +505,154 @@ public class ClientFrame extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane2;
     private javax.swing.JButton JbuttonEntrar;
     private javax.swing.JPanel LoginPanel;
     private javax.swing.JPanel TablePanel;
+    private javax.swing.JButton hitJogador1;
+    private javax.swing.JButton hitJogador2;
+    private javax.swing.JButton hitJogador3;
     private javax.swing.JTextField ipTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private static javax.swing.JList<String> listaJogador;
+    private javax.swing.JList<String> listaMensagem;
     private javax.swing.JTextField nomeTextField;
     private javax.swing.JTextField portoTextField;
     private java.awt.Button sair;
+    private javax.swing.JButton standJogador1;
+    private javax.swing.JButton standJogador2;
+    private javax.swing.JButton standJogador3;
     private java.awt.TextField textField1;
     private java.awt.TextField textField2;
     // End of variables declaration//GEN-END:variables
 
-    
- 
-    
-    public void listar( LoginCliente[] lista){
-     
-     
+    public void listar(LoginCliente[] lista) {
+
         DefaultListModel listModel = new DefaultListModel();
-        
-        for(int i=0 ;i<lista.length;i++){
-             System.out.println(lista[i].getNome()+" "+i);
-            switch(i){
-                case 0:   
-                    
-                   label1.setText(lista[i].getNome());
-                   label1.repaint();
+
+        for (int i = 0; i < lista.length; i++) {
+            System.out.println(lista[i].getNome() + " " + i);
+            switch (i) {
+                case 0:
+
+                    label1.setText(lista[i].getNome());
+                    label1.repaint();
+                   
 
                     break;
-                    case 1:
-                  this.label2.setText(lista[i].getNome());
-                
+                case 1:
+                    this.label2.setText(lista[i].getNome());
+                    
+
                     break;
-                    case 2:
-                   label3.setText(lista[i].getNome());
-                  
+                case 2:
+                    label3.setText(lista[i].getNome());
+                   
+
                     break;
-                    default:
-                        listModel.addElement(lista[i].getNome());
-                
-                
+                default:
+                    listModel.addElement(lista[i].getNome());
+
             }
             
+          
+
+        }
+        
+        //listaTresJogadores.add(user)
+        
+        Collections.addAll(listaTresJogadores, lista);
+        
+        if (listaTresJogadores.size() >= 3) {
+            jogador = 2;
+        }else{
+            jogador = listaTresJogadores.size() -1;
+        }
+               
+
+         
+        listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!");
+            System.out.println("projetoFinal.ClientFrame.listar() - lsiat jogador " + listaTresJogadores.size() + " - num jogador: " + jogador );
+        System.out.println(listMensagem.getSize());
+
+        listaMensagem.setModel(listMensagem);
+        listaJogador.setModel(listModel);
+
+    }
+
+    public void jogar(int numJogador) {
+
+        System.out.println("projetoFinal.ClientFrame.jogar() - Hora de jogar player 1" + numJogador);
+        
+        switch (numJogador) {
+            case 1:
+                hitJogador1.setEnabled(true);
+                standJogador1.setEnabled(true);
+                hitJogador2.setEnabled(false);
+                standJogador2.setEnabled(false);
+                hitJogador3.setEnabled(false);
+                standJogador3.setEnabled(false);
+               
+                break;
+            case 2:
+                hitJogador1.setEnabled(false);
+                standJogador1.setEnabled(false);
+                hitJogador2.setEnabled(true);
+                standJogador2.setEnabled(true);
+                hitJogador3.setEnabled(false);
+                standJogador3.setEnabled(false);
+                         
+                break;
+            case 3:
+                hitJogador1.setEnabled(false);
+                standJogador1.setEnabled(false);
+                hitJogador2.setEnabled(false);
+                standJogador2.setEnabled(false);
+                hitJogador3.setEnabled(true);
+                standJogador3.setEnabled(true);
+                
+                break;
+            default:
+                break;
+        }
+        
+       
+
+    }
+
+    public void mensagemGeral(int codMensagem) {
+       
+
+     
+        switch (codMensagem) {
+            case 0:
+
+                 listMensagem.addElement("Faltam 5 segundos para o jogo começar");
+
+                break;
+            case 1:
+                
+                System.out.println("projetoFinal.ClientFrame.mensagemGeral() - lsiat jogador " + listaTresJogadores.size() + " - num jogador: " + jogador );
+                 listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(jogador).getNome());
+
+                break;
+            case 2:
+                listMensagem.addElement(codMensagem);
+                break;
+            default:
+                listMensagem.addElement(codMensagem);
+
         }
 
-        listaJogador.setModel(listModel);
-        
+        listaMensagem.setModel(listMensagem);
     }
+
 }

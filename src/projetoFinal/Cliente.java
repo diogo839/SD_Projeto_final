@@ -18,11 +18,12 @@ import java.util.Vector;
 public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
      
     InterfaceServidor objRemoto;
-    ClientFrame cliFrame= new ClientFrame();
+    ClientFrame cliFrame;
     private LoginCliente user;
-    public Cliente() throws RemoteException {
-        
+    public Cliente(ClientFrame clientFrame) throws RemoteException {
+       
         super();
+         this.cliFrame = clientFrame;
     }
  
     public  InterfaceServidor login(String nome, String ip, int porto) {
@@ -31,9 +32,9 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
               String url = "//" + ip + ":"+porto+"/" + "Blackjack";
 
         objRemoto = (InterfaceServidor) Naming.lookup(url);
-        Cliente cliente = new Cliente();
+       // Cliente cliente = new Cliente(cliFrame);
         
-        user=objRemoto.login(nome, cliente);
+        user=objRemoto.login(nome, this);
        
                
         return objRemoto;
@@ -49,6 +50,8 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     public void NewListaUsers(LoginCliente[] lista)throws RemoteException{
           
        cliFrame.listar(lista);
+       
+        
     }
     
     
@@ -60,4 +63,19 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     public LoginCliente[] GetListaUsers()throws RemoteException{
         return objRemoto.getJogadores();
     }
+    
+    public void mensagemGeral(int tipo){
+        cliFrame.mensagemGeral(tipo);
+    }
+    
+    public void jogar(int numJogador){
+        
+        cliFrame.jogar(numJogador);
+        
+    }
+    
+//    public void mensagem(int Codmensagem){
+//        cliFrame.mensagem(Codmensagem);
+//        System.out.println(Codmensagem);
+//    }
 }
