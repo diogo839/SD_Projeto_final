@@ -19,13 +19,15 @@ public class LoginCliente implements Serializable{
   
     private String Nome;
     private int fichas;
+    private String estadoJogador;
     
-    public LoginCliente(String aNome, InterfaceCliente interfaceCliente){
+    public LoginCliente(String aNome, InterfaceCliente interfaceCliente, String estadoJogador){
         
         this.interfaceCliente = interfaceCliente;
  
         this.Nome=aNome;
         this.fichas=1000;
+        this.estadoJogador = estadoJogador;
         
     }
 
