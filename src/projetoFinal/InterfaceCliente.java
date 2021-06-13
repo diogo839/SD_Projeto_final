@@ -5,6 +5,7 @@
  */
 package projetoFinal;
 
+import cliente.Card;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -15,6 +16,6 @@ import java.rmi.RemoteException;
 public interface InterfaceCliente extends Remote{
     
     public void NewListaUsers(LoginCliente[] lista)throws RemoteException;
-    public void jogar(int numJogador)throws RemoteException;
+    public void jogar(Card[][] cartas)throws RemoteException;
     public void mensagemGeral(int tipo)throws RemoteException;
 }
