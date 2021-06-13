@@ -83,6 +83,12 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tempo" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="hitJogador1" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -93,24 +99,33 @@
                           <Component id="standJogador2" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tempo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                  <Component id="label1" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="label1" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="jogador1Panel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                   <Component id="label2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                                   <Component id="label3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jogador2Panel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jogador3Panel" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="265" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -132,7 +147,7 @@
                   <Component id="pontos2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
                   <Component id="pontos3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="211" max="32767" attributes="0"/>
                   <Component id="sair" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
@@ -154,7 +169,16 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="JScrollPane2" min="-2" pref="214" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="JScrollPane2" min="-2" pref="214" max="-2" attributes="0"/>
+                              <Component id="jogador1Panel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jogador2Panel" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jogador3Panel" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -358,6 +382,61 @@
         </Component>
         <Component class="javax.swing.JLabel" name="tempo">
         </Component>
+        <Container class="javax.swing.JPanel" name="jogador1Panel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jogador2Panel">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[250, 170]"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jogador3Panel">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[250, 170]"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="LoginPanel">

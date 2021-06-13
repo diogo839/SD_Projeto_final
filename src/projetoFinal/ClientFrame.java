@@ -117,6 +117,9 @@ public class ClientFrame extends JFrame {
         pontos3 = new java.awt.Label();
         jLabel6 = new javax.swing.JLabel();
         tempo = new javax.swing.JLabel();
+        jogador1Panel = new javax.swing.JPanel();
+        jogador2Panel = new javax.swing.JPanel();
+        jogador3Panel = new javax.swing.JPanel();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -219,6 +222,43 @@ public class ClientFrame extends JFrame {
 
         jLabel6.setText("Tempo: ");
 
+        javax.swing.GroupLayout jogador1PanelLayout = new javax.swing.GroupLayout(jogador1Panel);
+        jogador1Panel.setLayout(jogador1PanelLayout);
+        jogador1PanelLayout.setHorizontalGroup(
+            jogador1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        jogador1PanelLayout.setVerticalGroup(
+            jogador1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        jogador2Panel.setPreferredSize(new java.awt.Dimension(250, 170));
+
+        javax.swing.GroupLayout jogador2PanelLayout = new javax.swing.GroupLayout(jogador2Panel);
+        jogador2Panel.setLayout(jogador2PanelLayout);
+        jogador2PanelLayout.setHorizontalGroup(
+            jogador2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        jogador2PanelLayout.setVerticalGroup(
+            jogador2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        jogador3Panel.setPreferredSize(new java.awt.Dimension(250, 170));
+
+        javax.swing.GroupLayout jogador3PanelLayout = new javax.swing.GroupLayout(jogador3Panel);
+        jogador3Panel.setLayout(jogador3PanelLayout);
+        jogador3PanelLayout.setHorizontalGroup(
+            jogador3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        jogador3PanelLayout.setVerticalGroup(
+            jogador3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
         TablePanelLayout.setHorizontalGroup(
@@ -241,6 +281,11 @@ public class ClientFrame extends JFrame {
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tempo))
+                    .addGroup(TablePanelLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(hitJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,19 +295,25 @@ public class ClientFrame extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(standJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
                         .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tempo))
+                                .addGap(78, 78, 78)
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(140, 140, 140)
+                                .addGap(24, 24, 24)
+                                .addComponent(jogador1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGap(64, 64, 64)
                                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(149, 149, 149)
-                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jogador2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(265, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +330,7 @@ public class ClientFrame extends JFrame {
                 .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187)
                 .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                 .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
@@ -297,7 +348,13 @@ public class ClientFrame extends JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jogador1Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jogador2Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
@@ -567,6 +624,9 @@ public class ClientFrame extends JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jogador1Panel;
+    private javax.swing.JPanel jogador2Panel;
+    private javax.swing.JPanel jogador3Panel;
     java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
@@ -707,41 +767,86 @@ public class ClientFrame extends JFrame {
 
         }
 
+        System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
+
         cardArray = cartas;
         int espaco = 0;
         for (int i = 0; i < cartas.length; i++) {
             for (int k = 0; k < cartas[i].length; k++) {
                 if (cartas[i][k] != null) {
+//                    if (i == 0) {
+//                        if (k == 0) {
+//                            cardLabel = new CardLabel();
+//                            card = gameDeck.deal();
+//                            cardLabel.setCardImage("bv");
+//                            cardLabel.setCardCovered(false);
+//                            cardLabel.setLocation(this.arrayPositionX[i], this.arrayPositionY[i]);
+//                            this.TablePanel.add(cardLabel);
+//                        } else {
+//                            cardLabel = new CardLabel();
+//                            card = gameDeck.deal();
+//                            cardLabel.setCardImage(cartas[i][k].getName());
+//                            cardLabel.setCardCovered(false);
+//                            cardLabel.setLocation(this.arrayPositionX[0] + k * 20, this.arrayPositionY[0]);
+//                            this.TablePanel.add(cardLabel);
+//                        }
+//
+//
+//                    } else {
+//                        if (k == 0) {
+//                            espaco = 0;
+//                        } else {
+//                            espaco = k * 20;
+//                        }
+//
+//                        cardLabel = new CardLabel();
+//                        card = gameDeck.deal();
+//                        cardLabel.setCardImage(cartas[i][k].getName());
+//                        cardLabel.setCardCovered(false);
+//                        cardLabel.setLocation(this.arrayPositionX[i] + espaco, this.arrayPositionY[1]);
+//                        this.TablePanel.add(cardLabel);
+//                    }
+
                     if (i == 0) {
+                        cardLabel = new CardLabel();
+                        card = gameDeck.deal();
                         if (k == 0) {
-                            cardLabel = new CardLabel();
-                            card = gameDeck.deal();
+
                             cardLabel.setCardImage("bv");
                             cardLabel.setCardCovered(false);
                             cardLabel.setLocation(this.arrayPositionX[i], this.arrayPositionY[i]);
-                            this.TablePanel.add(cardLabel);
+
                         } else {
-                            cardLabel = new CardLabel();
-                            card = gameDeck.deal();
+                        
                             cardLabel.setCardImage(cartas[i][k].getName());
                             cardLabel.setCardCovered(false);
                             cardLabel.setLocation(this.arrayPositionX[0] + k * 20, this.arrayPositionY[0]);
-                            this.TablePanel.add(cardLabel);
+
                         }
+                        this.TablePanel.add(cardLabel);
+
                     } else {
-                        if (k == 0) {
-                            espaco = 0;
-                        } else {
-                            espaco = k * 20;
-                        }
 
                         cardLabel = new CardLabel();
                         card = gameDeck.deal();
                         cardLabel.setCardImage(cartas[i][k].getName());
                         cardLabel.setCardCovered(false);
-                        cardLabel.setLocation(this.arrayPositionX[i] + espaco, this.arrayPositionY[1]);
-                        this.TablePanel.add(cardLabel);
+                        cardLabel.setLocation(k * 20, 0);
+
+                        if (i == 1) {
+
+                            this.jogador1Panel.add(cardLabel);
+
+                        } else if (i == 2) {
+
+                            this.jogador2Panel.add(cardLabel);
+                        } else if (i == 3) {
+
+                            this.jogador3Panel.add(cardLabel);
+                        }
+
                     }
+
                 }
 
             }
@@ -793,8 +898,8 @@ public class ClientFrame extends JFrame {
 
         System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
     }
-    
-    public void tempo(int tempo){
+
+    public void tempo(int tempo) {
         this.tempo.setText(String.valueOf(tempo));
     }
 
