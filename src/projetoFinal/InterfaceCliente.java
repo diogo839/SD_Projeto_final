@@ -17,6 +17,8 @@ public interface InterfaceCliente extends Remote{
     
     public void NewListaUsers(LoginCliente[] lista)throws RemoteException;
     public void jogar(Card[][] cartas)throws RemoteException;
-    public void mensagemGeral(int tipo)throws RemoteException;
+      public void mensagemGeral(int codigo, int vezJogador)throws RemoteException;
+      public void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException;
+       public void tempo(int tempo)throws RemoteException;
     
 }

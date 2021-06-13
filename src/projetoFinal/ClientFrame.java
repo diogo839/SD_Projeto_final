@@ -25,12 +25,15 @@ public class ClientFrame extends JFrame {
     private LoginCliente user;
     Vector<LoginCliente> lista;
     private DefaultListModel listMensagem;
-     private Vector<LoginCliente> listaTresJogadores;
-     private Card[][] cardArray;
-     private int[] arrayPositionX={270,130,300,600};
-     private int[] arrayPositionY={150,350};
+    private Vector<LoginCliente> listaTresJogadores;
+    private Card[][] cardArray;
+    private int[] arrayPositionX = {270, 130, 300, 600};
+    private int[] arrayPositionY = {150, 350};
+    private LoginCliente jogador;
+    private int posicaoQuadro = -999;
 
-     private int jogador;
+    private int vezJogador;
+    private boolean minhaVez;
 
     public ClientFrame() {
 
@@ -43,10 +46,7 @@ public class ClientFrame extends JFrame {
         gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();            // embaralha
 
-
     }
-
-
 
     // apresenta as 13 primeiras cartas do deck (para teste apenas)
     private void drawHand() {
@@ -115,6 +115,8 @@ public class ClientFrame extends JFrame {
         pontos1 = new java.awt.Label();
         pontos2 = new java.awt.Label();
         pontos3 = new java.awt.Label();
+        jLabel6 = new javax.swing.JLabel();
+        tempo = new javax.swing.JLabel();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -163,6 +165,11 @@ public class ClientFrame extends JFrame {
 
         hitJogador2.setText("Hit");
         hitJogador2.setEnabled(false);
+        hitJogador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitJogador2ActionPerformed(evt);
+            }
+        });
 
         hitJogador1.setText("Hit");
         hitJogador1.setEnabled(false);
@@ -174,6 +181,11 @@ public class ClientFrame extends JFrame {
 
         hitJogador3.setText("Hit");
         hitJogador3.setEnabled(false);
+        hitJogador3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitJogador3ActionPerformed(evt);
+            }
+        });
 
         standJogador3.setText("Stand");
         standJogador3.setEnabled(false);
@@ -204,6 +216,8 @@ public class ClientFrame extends JFrame {
         pontos2.setText("");
 
         pontos3.setText("");
+
+        jLabel6.setText("Tempo: ");
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
@@ -237,11 +251,17 @@ public class ClientFrame extends JFrame {
                         .addComponent(standJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(TablePanelLayout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(140, 140, 140)
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
-                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tempo))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(140, 140, 140)
+                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(149, 149, 149)
+                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -269,7 +289,11 @@ public class ClientFrame extends JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(tempo)))
                 .addGap(19, 19, 19)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -281,7 +305,7 @@ public class ClientFrame extends JFrame {
                             .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,7 +318,7 @@ public class ClientFrame extends JFrame {
                                     .addComponent(standJogador1))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(hitJogador2)
                                     .addComponent(standJogador2)
@@ -458,15 +482,38 @@ public class ClientFrame extends JFrame {
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
 
     private void standJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            cliente.stand(3);
+            standJogador3.setEnabled(false);
+            hitJogador3.setEnabled(false);
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_standJogador3ActionPerformed
 
     private void standJogador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            cliente.stand(2);
+            standJogador2.setEnabled(false);
+            hitJogador2.setEnabled(false);
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_standJogador2ActionPerformed
 
     private void standJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador1ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            cliente.stand(1);
+            standJogador1.setEnabled(false);
+            hitJogador1.setEnabled(false);
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_standJogador1ActionPerformed
 
     private void hitJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador1ActionPerformed
@@ -477,8 +524,24 @@ public class ClientFrame extends JFrame {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
+
     }//GEN-LAST:event_hitJogador1ActionPerformed
+
+    private void hitJogador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador2ActionPerformed
+        try {
+            cliente.hit(2);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_hitJogador2ActionPerformed
+
+    private void hitJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador3ActionPerformed
+        try {
+            cliente.hit(3);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_hitJogador3ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -502,6 +565,7 @@ public class ClientFrame extends JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     java.awt.Label label1;
     private java.awt.Label label2;
@@ -518,6 +582,7 @@ public class ClientFrame extends JFrame {
     private javax.swing.JButton standJogador1;
     private javax.swing.JButton standJogador2;
     private javax.swing.JButton standJogador3;
+    private javax.swing.JLabel tempo;
     private java.awt.TextField textField1;
     private java.awt.TextField textField2;
     // End of variables declaration//GEN-END:variables
@@ -525,9 +590,10 @@ public class ClientFrame extends JFrame {
     public void listar(LoginCliente[] lista) {
 
         DefaultListModel listModel = new DefaultListModel();
+        boolean salaDeObservadores = false;
 
         for (int i = 0; i < lista.length; i++) {
-           
+
             switch (i) {
                 case 0:
 
@@ -535,134 +601,201 @@ public class ClientFrame extends JFrame {
                     pontos1.setText(String.valueOf(lista[i].getFichas()));
                     standJogador1.setVisible(true);
                     hitJogador1.setVisible(true);
+                    salaDeObservadores = false;
+
                     break;
                 case 1:
                     label2.setText(lista[i].getNome());
                     pontos2.setText(String.valueOf(lista[i].getFichas()));
                     standJogador2.setVisible(true);
                     hitJogador2.setVisible(true);
+                    salaDeObservadores = false;
+
                     break;
                 case 2:
                     label3.setText(lista[i].getNome());
                     pontos3.setText(String.valueOf(lista[i].getFichas()));
                     standJogador3.setVisible(true);
                     hitJogador3.setVisible(true);
+                    salaDeObservadores = false;
                     break;
                 default:
+                    salaDeObservadores = true;
                     listModel.addElement(lista[i].getNome());
 
             }
-            
-          
 
         }
-        
+
+        if (salaDeObservadores) {
+            listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!");
+        } else {
+            listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!");
+
+        }
+
+        jogador = lista[lista.length - 1];
+        System.out.println("projetoFinal.ClientFrame.listar() - " + jogador.getNome());
+
         //listaTresJogadores.add(user)
-              Collections.addAll(listaTresJogadores, lista);
+        listaTresJogadores.clear();
+        Collections.addAll(listaTresJogadores, lista);
 
         if (listaTresJogadores.size() >= 3) {
-            jogador = 2;
+//            vezJogador = 0;
         } else if (listaTresJogadores.size() < 3) {
             label3.setText(" ");
             pontos3.setText(" ");
             standJogador3.setVisible(false);
             hitJogador3.setVisible(false);
+//            vezJogador = 0;
             if (listaTresJogadores.size() < 2) {
                 label2.setText("");
                 pontos2.setText("");
                 standJogador2.setVisible(false);
                 hitJogador2.setVisible(false);
             }
-        } else {
-            jogador = listaTresJogadores.size() - 1;
-        }
 
-        listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!");
-       
+        } else {
+//            vezJogador = 0;
+        }
 
         listaMensagem.setModel(listMensagem);
         listaJogador.setModel(listModel);
-          repaint();
+        repaint();
 
     }
 
+//      public void vezJogador(int vezJogador){
+//          this.vezJogador = vezJogador;
+//          if (vezJogador){
+//              
+//          }
+//      }
     public void jogar(Card[][] cartas) {
         this.TablePanel.revalidate();
 
         this.TablePanel.repaint();
-           // System.out.println(cartas.length);
-        hitJogador1.setEnabled(true);
-        standJogador1.setEnabled(true);
+        // System.out.println(cartas.length);
+
+        hitJogador1.setEnabled(false);
+        standJogador1.setEnabled(false);
         hitJogador2.setEnabled(false);
         standJogador2.setEnabled(false);
         hitJogador3.setEnabled(false);
         standJogador3.setEnabled(false);
-            cardArray=cartas;
-            int espaco=0;
+
+        System.out.println("projetoFinal.ClientFrame.jogar() - " + minhaVez + " - " + posicaoQuadro);
+
+        if (minhaVez) {
+
+            switch (posicaoQuadro) {
+                case 0:
+                    hitJogador1.setEnabled(true);
+                    standJogador1.setEnabled(true);
+                    break;
+                case 1:
+                    hitJogador2.setEnabled(true);
+                    standJogador2.setEnabled(true);
+                    break;
+                case 2:
+                    hitJogador3.setEnabled(true);
+                    standJogador3.setEnabled(true);
+                    break;
+
+            }
+
+        }
+
+        cardArray = cartas;
+        int espaco = 0;
         for (int i = 0; i < cartas.length; i++) {
-             for (int k = 0; k < cartas[i].length; k++) {
-                if(cartas[i][k]!=null) {
-                 if(i==0){
-                     if(k==0){
-                    cardLabel = new CardLabel();
-                    card = gameDeck.deal();
-                    cardLabel.setCardImage("bv");
-                    cardLabel.setCardCovered(false);
-                    cardLabel.setLocation(this.arrayPositionX[i], this.arrayPositionY[i]);
-                    this.TablePanel.add(cardLabel);
-                     }else{
-                  cardLabel = new CardLabel();
-                    card = gameDeck.deal();
-                    cardLabel.setCardImage(cartas[i][k].getName());
-                    cardLabel.setCardCovered(false);
-                    cardLabel.setLocation(this.arrayPositionX[0]+k*20, this.arrayPositionY[0]);
-                    this.TablePanel.add(cardLabel);}
-                 }else{
-                     if(k==0){
-                         espaco=0;
-                     }else{
-                         espaco=k*20;
-                     }
-                    
-                    cardLabel = new CardLabel();
-                    card = gameDeck.deal();
-                    cardLabel.setCardImage(cartas[i][k].getName());
-                    cardLabel.setCardCovered(false);
-                    cardLabel.setLocation(this.arrayPositionX[i]+espaco, this.arrayPositionY[1]);
-                    this.TablePanel.add(cardLabel);
-                 }}
+            for (int k = 0; k < cartas[i].length; k++) {
+                if (cartas[i][k] != null) {
+                    if (i == 0) {
+                        if (k == 0) {
+                            cardLabel = new CardLabel();
+                            card = gameDeck.deal();
+                            cardLabel.setCardImage("bv");
+                            cardLabel.setCardCovered(false);
+                            cardLabel.setLocation(this.arrayPositionX[i], this.arrayPositionY[i]);
+                            this.TablePanel.add(cardLabel);
+                        } else {
+                            cardLabel = new CardLabel();
+                            card = gameDeck.deal();
+                            cardLabel.setCardImage(cartas[i][k].getName());
+                            cardLabel.setCardCovered(false);
+                            cardLabel.setLocation(this.arrayPositionX[0] + k * 20, this.arrayPositionY[0]);
+                            this.TablePanel.add(cardLabel);
+                        }
+                    } else {
+                        if (k == 0) {
+                            espaco = 0;
+                        } else {
+                            espaco = k * 20;
+                        }
 
+                        cardLabel = new CardLabel();
+                        card = gameDeck.deal();
+                        cardLabel.setCardImage(cartas[i][k].getName());
+                        cardLabel.setCardCovered(false);
+                        cardLabel.setLocation(this.arrayPositionX[i] + espaco, this.arrayPositionY[1]);
+                        this.TablePanel.add(cardLabel);
+                    }
+                }
 
-        }}
+            }
+        }
         repaint();
-       
 
     }
 
-    public void mensagemGeral(int codMensagem) {
-       
+    public void mensagemGeral(int codMensagem, int vezJogador) {
 
-     
         switch (codMensagem) {
             case 0:
 
-                 listMensagem.addElement("Faltam 5 segundos para o jogo começar");
+                listMensagem.addElement("Faltam 5 segundos para o jogo começar");
 
                 break;
             case 1:
-                
-                listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(jogador).getNome());
+
+                listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(vezJogador).getNome());
 
                 break;
             case 2:
-                listMensagem.addElement(codMensagem);
+                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " deu Hit");
+                break;
+            case 3:
+                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez Stand");
+            case 4:
+                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 10 segundos para fazer a jogada");
+            case 5:
+                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada");
                 break;
             default:
                 listMensagem.addElement(codMensagem);
 
         }
 
+        this.vezJogador = vezJogador;
+
         listaMensagem.setModel(listMensagem);
+    }
+
+    //guarda a posição do jogador na mesa e guarda a sua variavel a dizer se é a vez de jnogar ou não, Esses valores são diferentes para cada utilizador
+    public void setVezJogador(boolean minhaVez, int posicaoQuadro) {
+        this.minhaVez = minhaVez;
+
+        if (this.posicaoQuadro == -999) {
+            this.posicaoQuadro = posicaoQuadro;
+        }
+
+        System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
+    }
+    
+    public void tempo(int tempo){
+        this.tempo.setText(String.valueOf(tempo));
     }
 
 }

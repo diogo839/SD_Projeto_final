@@ -19,6 +19,7 @@ public class LoginCliente implements Serializable{
     private String Nome;
     private int fichas;
     private String estadoJogador;
+    private boolean minhaVez;
     
     public LoginCliente(String aNome, InterfaceCliente interfaceCliente, String estadoJogador){
         
@@ -27,6 +28,7 @@ public class LoginCliente implements Serializable{
         this.Nome=aNome;
         this.fichas=1000;
         this.estadoJogador = estadoJogador;
+        this.minhaVez = false;
         
     }
 
@@ -46,6 +48,19 @@ public class LoginCliente implements Serializable{
         return interfaceCliente;
     }
 
+    public boolean isMinhaVez() {
+        return minhaVez;
+    }
+
+    public void setMinhaVez(boolean minhaVez) {
+        this.minhaVez = minhaVez;
+    }
+    
+    
+ @Override
+    public String toString() {
+        return "LoginCliente{" + "Nome=" + Nome + ", fichas=" + fichas + ", estadoJogador=" + estadoJogador + ", minhaVez=" + minhaVez + '}';
+    }
   
     
     

@@ -65,8 +65,8 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         return objRemoto.getJogadores();
     }
     
-    public void mensagemGeral(int tipo){
-        cliFrame.mensagemGeral(tipo);
+    public void mensagemGeral(int codigo, int vezJogador){
+        cliFrame.mensagemGeral(codigo, vezJogador);
     }
     
  
@@ -85,6 +85,22 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     public void hit(int nPlayer)throws RemoteException{
         objRemoto.hit(nPlayer);
     }
+    
+    public void stand(int nPlayer)throws RemoteException{
+        objRemoto.stand(nPlayer);
+    }
+    
+    public void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException{
+        cliFrame.setVezJogador(minhaVez, posicaoQuadro);
+    }
+    
+     public void tempo(int tempo)throws RemoteException{
+         cliFrame.tempo(tempo);
+     }
+    
+//      public void vezJogador(int vezJogador)throws RemoteException{
+//          
+//      }
     
     
 }
