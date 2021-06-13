@@ -5,6 +5,7 @@
  */
 package projetoFinal;
 
+import cliente.Card;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -68,14 +69,22 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         cliFrame.mensagemGeral(tipo);
     }
     
-    public void jogar(int numJogador){
-        
-        cliFrame.jogar(numJogador);
-        
-    }
+ 
     
 //    public void mensagem(int Codmensagem){
 //        cliFrame.mensagem(Codmensagem);
 //        System.out.println(Codmensagem);
 //    }
+
+    @Override
+    public void jogar(Card[][] cartas) throws RemoteException {
+        
+    cliFrame.jogar(cartas);
+    }
+    
+    public void hit(int nPlayer)throws RemoteException{
+        objRemoto.hit(nPlayer);
+    }
+    
+    
 }

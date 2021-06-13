@@ -1,6 +1,8 @@
 package cliente;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable{
    private String name;  // nomes das carta (mesmo nome do ficheiro .png)
                          // c - cubs(paus);   d - diamonds(ouros)
                          // h - heads(copas); s - spades(espadas)

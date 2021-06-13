@@ -26,6 +26,9 @@ public class ClientFrame extends JFrame {
     Vector<LoginCliente> lista;
     private DefaultListModel listMensagem;
      private Vector<LoginCliente> listaTresJogadores;
+     private Card[][] cardArray;
+     private int[] arrayPositionX={270,130,300,600};
+     private int[] arrayPositionY={150,350};
 
      private int jogador;
 
@@ -40,72 +43,10 @@ public class ClientFrame extends JFrame {
         gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();            // embaralha
 
-        //drawHand();
-        drawBlackjack();
 
     }
 
-    private void drawBlackjack() {
-        // cartas do dealer
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage("bv");
-        cardLabel.setCardCovered(false);
-        cardLabel.setLocation(270, 150);
-        this.TablePanel.add(cardLabel);
 
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(false);
-        cardLabel.setLocation(350, 150);
-        this.TablePanel.add(cardLabel);
-
-        // cartas do player 1
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(true);
-        cardLabel.setLocation(530, 350);
-        this.TablePanel.add(cardLabel);
-
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(false);
-        cardLabel.setLocation(550, 350);
-        this.TablePanel.add(cardLabel);
-
-        // cartas do player 2
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(true);
-        cardLabel.setLocation(300, 350);
-        this.TablePanel.add(cardLabel);
-
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(false);
-        cardLabel.setLocation(320, 350);
-        this.TablePanel.add(cardLabel);
-
-        // cartas do player 3
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(true);
-        cardLabel.setLocation(80, 350);
-        this.TablePanel.add(cardLabel);
-
-        cardLabel = new CardLabel();
-        card = gameDeck.deal();
-        cardLabel.setCardImage(card.getName());
-        cardLabel.setCardCovered(false);
-        cardLabel.setLocation(100, 350);
-        this.TablePanel.add(cardLabel);
-    }
 
     // apresenta as 13 primeiras cartas do deck (para teste apenas)
     private void drawHand() {
@@ -153,6 +94,7 @@ public class ClientFrame extends JFrame {
 
         textField1 = new java.awt.TextField();
         textField2 = new java.awt.TextField();
+        label4 = new java.awt.Label();
         TablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaJogador = new javax.swing.JList<>();
@@ -170,6 +112,9 @@ public class ClientFrame extends JFrame {
         standJogador3 = new javax.swing.JButton();
         standJogador2 = new javax.swing.JButton();
         standJogador1 = new javax.swing.JButton();
+        pontos1 = new java.awt.Label();
+        pontos2 = new java.awt.Label();
+        pontos3 = new java.awt.Label();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -182,6 +127,8 @@ public class ClientFrame extends JFrame {
         textField1.setText("textField1");
 
         textField2.setText("textField2");
+
+        label4.setText("label4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Card Game GUI");
@@ -219,6 +166,11 @@ public class ClientFrame extends JFrame {
 
         hitJogador1.setText("Hit");
         hitJogador1.setEnabled(false);
+        hitJogador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitJogador1ActionPerformed(evt);
+            }
+        });
 
         hitJogador3.setText("Hit");
         hitJogador3.setEnabled(false);
@@ -247,6 +199,12 @@ public class ClientFrame extends JFrame {
             }
         });
 
+        pontos1.setText("");
+
+        pontos2.setText("");
+
+        pontos3.setText("");
+
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
         TablePanelLayout.setHorizontalGroup(
@@ -265,19 +223,7 @@ public class ClientFrame extends JFrame {
                         .addComponent(hitJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(standJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 333, Short.MAX_VALUE))))
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(80, 80, 80))))
+                        .addGap(0, 332, Short.MAX_VALUE))))
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
@@ -297,6 +243,25 @@ public class ClientFrame extends JFrame {
                         .addGap(149, 149, 149)
                         .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(80, 80, 80))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(pontos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170)
+                .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187)
+                .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,27 +275,35 @@ public class ClientFrame extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hitJogador1)
-                            .addComponent(standJogador1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hitJogador2)
-                            .addComponent(standJogador2)
-                            .addComponent(hitJogador3)
-                            .addComponent(standJogador3))
-                        .addGap(25, 25, 25))))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(hitJogador1)
+                                    .addComponent(standJogador1))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(hitJogador2)
+                                    .addComponent(standJogador2)
+                                    .addComponent(hitJogador3)
+                                    .addComponent(standJogador3))
+                                .addGap(25, 25, 25))))
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addComponent(pontos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         getContentPane().add(TablePanel, "card2");
@@ -496,6 +469,17 @@ public class ClientFrame extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_standJogador1ActionPerformed
 
+    private void hitJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador1ActionPerformed
+
+        try {
+            cliente.hit(1);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }//GEN-LAST:event_hitJogador1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -522,9 +506,13 @@ public class ClientFrame extends JFrame {
     java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+    private java.awt.Label label4;
     private static javax.swing.JList<String> listaJogador;
     private javax.swing.JList<String> listaMensagem;
     private javax.swing.JTextField nomeTextField;
+    private java.awt.Label pontos1;
+    private java.awt.Label pontos2;
+    private java.awt.Label pontos3;
     private javax.swing.JTextField portoTextField;
     private java.awt.Button sair;
     private javax.swing.JButton standJogador1;
@@ -539,24 +527,26 @@ public class ClientFrame extends JFrame {
         DefaultListModel listModel = new DefaultListModel();
 
         for (int i = 0; i < lista.length; i++) {
-            System.out.println(lista[i].getNome() + " " + i);
+           
             switch (i) {
                 case 0:
 
                     label1.setText(lista[i].getNome());
-                    label1.repaint();
-                   
-
+                    pontos1.setText(String.valueOf(lista[i].getFichas()));
+                    standJogador1.setVisible(true);
+                    hitJogador1.setVisible(true);
                     break;
                 case 1:
-                    this.label2.setText(lista[i].getNome());
-                    
-
+                    label2.setText(lista[i].getNome());
+                    pontos2.setText(String.valueOf(lista[i].getFichas()));
+                    standJogador2.setVisible(true);
+                    hitJogador2.setVisible(true);
                     break;
                 case 2:
                     label3.setText(lista[i].getNome());
-                   
-
+                    pontos3.setText(String.valueOf(lista[i].getFichas()));
+                    standJogador3.setVisible(true);
+                    hitJogador3.setVisible(true);
                     break;
                 default:
                     listModel.addElement(lista[i].getNome());
@@ -568,62 +558,83 @@ public class ClientFrame extends JFrame {
         }
         
         //listaTresJogadores.add(user)
-        
-        Collections.addAll(listaTresJogadores, lista);
-        
+              Collections.addAll(listaTresJogadores, lista);
+
         if (listaTresJogadores.size() >= 3) {
             jogador = 2;
-        }else{
-            jogador = listaTresJogadores.size() -1;
+        } else if (listaTresJogadores.size() < 3) {
+            label3.setText(" ");
+            pontos3.setText(" ");
+            standJogador3.setVisible(false);
+            hitJogador3.setVisible(false);
+            if (listaTresJogadores.size() < 2) {
+                label2.setText("");
+                pontos2.setText("");
+                standJogador2.setVisible(false);
+                hitJogador2.setVisible(false);
+            }
+        } else {
+            jogador = listaTresJogadores.size() - 1;
         }
-               
 
-         
         listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!");
-            System.out.println("projetoFinal.ClientFrame.listar() - lsiat jogador " + listaTresJogadores.size() + " - num jogador: " + jogador );
-        System.out.println(listMensagem.getSize());
+       
 
         listaMensagem.setModel(listMensagem);
         listaJogador.setModel(listModel);
+          repaint();
 
     }
 
-    public void jogar(int numJogador) {
+    public void jogar(Card[][] cartas) {
+        this.TablePanel.revalidate();
 
-        System.out.println("projetoFinal.ClientFrame.jogar() - Hora de jogar player 1" + numJogador);
-        
-        switch (numJogador) {
-            case 1:
-                hitJogador1.setEnabled(true);
-                standJogador1.setEnabled(true);
-                hitJogador2.setEnabled(false);
-                standJogador2.setEnabled(false);
-                hitJogador3.setEnabled(false);
-                standJogador3.setEnabled(false);
-               
-                break;
-            case 2:
-                hitJogador1.setEnabled(false);
-                standJogador1.setEnabled(false);
-                hitJogador2.setEnabled(true);
-                standJogador2.setEnabled(true);
-                hitJogador3.setEnabled(false);
-                standJogador3.setEnabled(false);
-                         
-                break;
-            case 3:
-                hitJogador1.setEnabled(false);
-                standJogador1.setEnabled(false);
-                hitJogador2.setEnabled(false);
-                standJogador2.setEnabled(false);
-                hitJogador3.setEnabled(true);
-                standJogador3.setEnabled(true);
-                
-                break;
-            default:
-                break;
-        }
-        
+        this.TablePanel.repaint();
+           // System.out.println(cartas.length);
+        hitJogador1.setEnabled(true);
+        standJogador1.setEnabled(true);
+        hitJogador2.setEnabled(false);
+        standJogador2.setEnabled(false);
+        hitJogador3.setEnabled(false);
+        standJogador3.setEnabled(false);
+            cardArray=cartas;
+            int espaco=0;
+        for (int i = 0; i < cartas.length; i++) {
+             for (int k = 0; k < cartas[i].length; k++) {
+                if(cartas[i][k]!=null) {
+                 if(i==0){
+                     if(k==0){
+                    cardLabel = new CardLabel();
+                    card = gameDeck.deal();
+                    cardLabel.setCardImage("bv");
+                    cardLabel.setCardCovered(false);
+                    cardLabel.setLocation(this.arrayPositionX[i], this.arrayPositionY[i]);
+                    this.TablePanel.add(cardLabel);
+                     }else{
+                  cardLabel = new CardLabel();
+                    card = gameDeck.deal();
+                    cardLabel.setCardImage(cartas[i][k].getName());
+                    cardLabel.setCardCovered(false);
+                    cardLabel.setLocation(this.arrayPositionX[0]+k*20, this.arrayPositionY[0]);
+                    this.TablePanel.add(cardLabel);}
+                 }else{
+                     if(k==0){
+                         espaco=0;
+                     }else{
+                         espaco=k*20;
+                     }
+                    
+                    cardLabel = new CardLabel();
+                    card = gameDeck.deal();
+                    cardLabel.setCardImage(cartas[i][k].getName());
+                    cardLabel.setCardCovered(false);
+                    cardLabel.setLocation(this.arrayPositionX[i]+espaco, this.arrayPositionY[1]);
+                    this.TablePanel.add(cardLabel);
+                 }}
+
+
+        }}
+        repaint();
        
 
     }
@@ -640,8 +651,7 @@ public class ClientFrame extends JFrame {
                 break;
             case 1:
                 
-                System.out.println("projetoFinal.ClientFrame.mensagemGeral() - lsiat jogador " + listaTresJogadores.size() + " - num jogador: " + jogador );
-                 listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(jogador).getNome());
+                listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(jogador).getNome());
 
                 break;
             case 2:
