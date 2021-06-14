@@ -737,7 +737,9 @@ public class ClientFrame extends JFrame {
 
         this.TablePanel.repaint();
         // System.out.println(cartas.length);
-
+        this.jogador2Panel.removeAll();
+        this.jogador1Panel.removeAll();
+        this.jogador3Panel.removeAll();
         hitJogador1.setEnabled(false);
         standJogador1.setEnabled(false);
         hitJogador2.setEnabled(false);
