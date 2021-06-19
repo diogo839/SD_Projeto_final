@@ -27,6 +27,10 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
          this.cliFrame = clientFrame;
     }
  
+    public Cliente()throws RemoteException{
+        super();
+    }
+    
     public  InterfaceServidor login(String nome, String ip, int porto) {
 
         try {
@@ -77,9 +81,9 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
 //    }
 
     @Override
-    public void jogar(Card[][] cartas) throws RemoteException {
+    public void jogar(Card[][] cartas,int[] valores,String estado) throws RemoteException {
         
-    cliFrame.jogar(cartas);
+    cliFrame.jogar(cartas,valores,estado);
     }
     
     public void hit(int nPlayer)throws RemoteException{
@@ -98,6 +102,10 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
          cliFrame.tempo(tempo);
      }
     
+     public void disableButton(int nPlayer)throws RemoteException{
+        cliFrame.disableButton(nPlayer);
+    }
+     
 //      public void vezJogador(int vezJogador)throws RemoteException{
 //          
 //      }
