@@ -9,10 +9,12 @@ import cliente.Card;
 import cliente.CardLabel;
 import cliente.Deck;
 import java.net.InetAddress;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Timer;
@@ -31,6 +33,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
 
     private static String estado;
     public Card[][] arrayCartas;
+    public int[] valores;
     private int vezJogador;
     private int numJogadoresTable;
     private boolean exitTrhead = false;
@@ -130,7 +133,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
             if (obj2.getNome().equalsIgnoreCase(nome) && obj2.getInterfaceCliente().equals(iCliente)) {
                 ite.remove();
 
-                if (i == 0) {
+                  if (i == 0) {
                     removeTheElement(1);
                 } else if (i == 1) {
                     removeTheElement(2);
@@ -171,21 +174,47 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
 
         Deck gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();
-
+        int nAsh = 0;
         try {
             if (!estado.equalsIgnoreCase("jogar")) {
                 if (listaLogin.size() < 3) {
 
                     arrayCartas = new Card[listaLogin.size() + 1][2];
+                    valores = new int[listaLogin.size() + 1];
                 } else {
                     arrayCartas = new Card[4][2];
+                    valores = new int[4];
                 }
 
                 for (int i = 0; i < arrayCartas.length; i++) {
+                    valores[i] = 0;
+                    nAsh = 0;
                     for (int k = 0; k < arrayCartas[i].length; k++) {
                         card = gameDeck.deal();
                         arrayCartas[i][k] = card;
+                        if (isNumeric(arrayCartas[i][k].getName().substring(1))) {
+                            if (Integer.parseInt(arrayCartas[i][k].getName().substring(1)) != 1) {
+                                valores[i] += Integer.parseInt(arrayCartas[i][k].getName().substring(1));
+                            } else {
+                                nAsh++;
+                            }
+                        } else {
+                            valores[i] += 10;
+                        }
                     }
+                    if (nAsh != 0) {
+                        for (int j = 0; j < nAsh; j++) {
+                            int temp = valores[i];
+                            temp += 11;
+                            if (temp > 21) {
+                                valores[i] += 1;
+                            } else {
+                                valores[i] += 11;
+                            }
+
+                        }
+                    }
+
                 }
             }
 
@@ -196,7 +225,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
 
                 try {
 
-                    obj2.getInterfaceCliente().jogar(arrayCartas);
+                    obj2.getInterfaceCliente().jogar(arrayCartas,valores,estado);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -213,10 +242,11 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
 
     public synchronized void hit(int nPlayer) throws RemoteException {
         Card card;
-
+        int nAsh = 0;
         Deck gameDeck = new Deck();         // cria um baralho
         gameDeck.shuffle();
         card = gameDeck.deal();
+      
         Card[][] longer = new Card[arrayCartas.length][arrayCartas[nPlayer].length + 1];
         for (int i = 0; i < longer.length; i++) {
             for (int k = 0; k < longer[i].length; k++) {
@@ -229,35 +259,91 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                 }
             }
         }
-        arrayCartas = longer;
-        Iterator<LoginCliente> ite = listaLogin.iterator();
+        this.arrayCartas = longer;
 
+        for (int i = 0; i < arrayCartas.length; i++) {
+                    valores[i] = 0;
+                    nAsh = 0;
+                    for (int k = 0; k < arrayCartas[i].length; k++) {
+                       if(arrayCartas[i][k]!=null){
+                        if (isNumeric(arrayCartas[i][k].getName().substring(1))) {
+                            if (Integer.parseInt(arrayCartas[i][k].getName().substring(1))!=1) {
+                                valores[i] +=Integer.parseInt(arrayCartas[i][k].getName().substring(1));
+                            } else {
+                                nAsh++;
+                            }
+                        } else {
+                            valores[i] += 10;
+                        }
+                    }}
+                        System.out.println(nAsh);
+                    if (nAsh != 0) {
+                        for (int j = 0; j < nAsh; j++) {
+                            int temp = valores[i];
+                            temp += 11;
+                            if (temp >= 22) {
+                                valores[i] += 1;
+                            } else {
+                                valores[i] += 11;
+                            }
+
+                        }
+                    }
+                    
+
+                }
+  
+        Iterator<LoginCliente> ite = listaLogin.iterator();
+        int flag=1;
         while (ite.hasNext()) {
             LoginCliente obj2 = ite.next();
 
             try {
-
-                obj2.getInterfaceCliente().jogar(arrayCartas);
+               
+                obj2.getInterfaceCliente().jogar(arrayCartas,valores,estado);
                 obj2.getInterfaceCliente().mensagemGeral(2, vezJogador);
-
+                 if(flag==nPlayer){
+                    if(valores[flag]>=21){                           
+                        stand(nPlayer);
+                        obj2.getInterfaceCliente().disableButton(nPlayer);
+                    }
+                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+           flag++;
         }
 
         tempoThread = 20;
 
     }
 
+     public static boolean isNumeric(final String str) {
+
+        // null or empty
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+    
     public synchronized void stand(int nPlayer) throws RemoteException {
 
         //Sempre que um jogador faz stand incrementa o contador vezJogador e passa para a vez do próximo jogador. até o fim da rodada
         vezJogador++;
+
         System.out.println("projetoFinal.Servidor.stand() - numJogadoresTable: " + numJogadoresTable + " - vezJogador: " + vezJogador + " - vezJogador: " + vezJogador);
         if (numJogadoresTable == vezJogador) {
             vezJogador = 0;
-            //novaRodada(); Depois é só descometntar essa linha, é aqui onde o servidor vai chamar a função de nova rodada e essa função vai verificar os pontos de cada utilizador
+            novaRodada();// Depois é só descometntar essa linha, é aqui onde o servidor vai chamar a função de nova rodada e essa função vai verificar os pontos de cada utilizador
         }
 
         Iterator<LoginCliente> ite = listaLogin.iterator();
@@ -276,23 +362,49 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                 obj2.getInterfaceCliente().vezJogador(false, 0);
                 obj2.setMinhaVez(false);
                 obj2.getInterfaceCliente().mensagemGeral(1, vezJogador);
-                obj2.getInterfaceCliente().jogar(arrayCartas);
-            } catch (Exception e) {
+                obj2.getInterfaceCliente().jogar(arrayCartas,valores,estado);
+            }
+            
+            catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
 
         listaLogin.get(vezJogador).getInterfaceCliente().vezJogador(true, vezJogador);
-        listaLogin.get(vezJogador).getInterfaceCliente().jogar(arrayCartas);
+        listaLogin.get(vezJogador).getInterfaceCliente().jogar(arrayCartas,valores,estado);
         listaLogin.get(vezJogador).setMinhaVez(true);
         tempoThread = 20;
 
     }
 
     //Começa aqui a nova rodada
-    public synchronized void novaRodada() {
-
+    public synchronized void novaRodada() throws RemoteException {
+      
+        estado = "server";
+        tempoThread = 0;
+        while(valores[0]<=21){
+       
+           
+                 hit(0);
+                
+           
+        if(valores[0]==19 && valores[0]==19 && valores[0]==20 && valores[0]==21){
+                estado = "startNewGame";
+                 break;
+            
+            
+        }
+         
+        }
+        if(valores[0]>21){
+            estado = "startNewGame";
+        }
+        
+        System.out.println(estado);
+       
+       
+        
     }
 
     public synchronized void sendMensagens(int codigoMensagem, int vezJogador) throws RemoteException {
@@ -316,11 +428,11 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
 
             @Override
             public void run() {
-
+                int timer=5;
                 while (true) {
-
+                        System.out.println(estado);
                     try {
-                        
+                        if(!estado.equals("server") && !estado.equals("startNewGame")){
                         //Manda o tempo que falta para os clientes
                         Iterator<LoginCliente> ite = listaLogin.iterator();
                         while (ite.hasNext()) {
@@ -329,11 +441,11 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                             try {
                                 obj2.getInterfaceCliente().tempo(tempoThread);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                
                             }
 
                         }
-
+                       
                         Thread.sleep(1000L);// 1000L = 1000ms = 1 second
 
                         tempoThread--;
@@ -361,10 +473,29 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                 stand(vezJogador);
                             }
                         }
+                    }else if(estado.equals("startNewGame")){
+                       
+                        if(timer!=0){
+                             Thread.sleep(1000L);// 1000L = 1000ms = 1 second
+                                System.out.println(timer);
+                        timer--;
+                        }
+                        else{
+                           estado="pausa";
+                           tempoThread = 10;
+                        }
+                    }
 
-                    } catch (Exception e) {
-                        System.err.println(e);
+                    } catch (ConcurrentModificationException e) {
+                        tempoThread = 10;
+                        
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        e.printStackTrace();
+                }catch(ConnectException e){
+                    }catch (Exception e) {
+                        
                         Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, e);
+
                     }
 
                 }
