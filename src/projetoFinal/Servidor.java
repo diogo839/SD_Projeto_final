@@ -495,7 +495,11 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                 obj2.setMinhaVez(false);
                 obj2.getInterfaceCliente().mensagemGeral(1, vezJogador);
                 obj2.getInterfaceCliente().jogar(arrayCartas, valores, estado);
-            } catch (ConnectException e) {
+            } catch(ConcurrentModificationException e){
+                e.printStackTrace();
+                logout(obj2.getNome(), obj2.getInterfaceCliente());
+            }
+            catch (ConnectException e) {
                 e.printStackTrace();
                 logout(obj2.getNome(), obj2.getInterfaceCliente());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -703,7 +707,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                             LoginCliente obj2 = ite.next();
 
                                             try {
-                                                System.out.println(playing[flag].getNome());
+                                                
                                                 obj2.setFichas(obj2.getFichas() - 2);
                                                 if (obj2.getFichas() <= 0 && obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())) {
                                                     obj2.getInterfaceCliente().lost();
