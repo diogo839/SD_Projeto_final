@@ -21,4 +21,5 @@ public interface InterfaceCliente extends Remote{
         public void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException;
          public void tempo(int tempo)throws RemoteException;
           public void disableButton(int nPlayer)throws RemoteException;
+          public void lost()throws RemoteException;
 }

@@ -25,7 +25,7 @@ public class LoginCliente implements Serializable {
         this.interfaceCliente = interfaceCliente;
 
         this.Nome = aNome;
-        this.fichas = 1000;
+        this.fichas = 10;
         this.estadoJogador = estadoJogador;
         this.minhaVez = false;
 
