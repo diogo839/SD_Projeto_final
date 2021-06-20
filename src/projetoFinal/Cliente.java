@@ -20,7 +20,7 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
      
     InterfaceServidor objRemoto;
     ClientFrame cliFrame;
-    private LoginCliente user;
+    public LoginCliente user;
     public Cliente(ClientFrame clientFrame) throws RemoteException {
        
         super();
@@ -71,6 +71,8 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     
     public void mensagemGeral(int codigo, int vezJogador){
         cliFrame.mensagemGeral(codigo, vezJogador);
+        
+        
     }
     
  
@@ -104,6 +106,10 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     
      public void disableButton(int nPlayer)throws RemoteException{
         cliFrame.disableButton(nPlayer);
+    }
+     
+        public void lost()throws RemoteException{
+        cliFrame.lost();
     }
      
 //      public void vezJogador(int vezJogador)throws RemoteException{

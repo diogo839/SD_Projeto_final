@@ -96,6 +96,7 @@ public class ClientFrame extends JFrame {
         textField1 = new java.awt.TextField();
         textField2 = new java.awt.TextField();
         label4 = new java.awt.Label();
+        jDialog1 = new javax.swing.JDialog();
         TablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaJogador = new javax.swing.JList<>();
@@ -140,6 +141,17 @@ public class ClientFrame extends JFrame {
         textField2.setText("textField2");
 
         label4.setText("label4");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Card Game GUI");
@@ -496,15 +508,6 @@ public class ClientFrame extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        try {
-            cliente.logout();
-            System.exit(0);
-        } catch (RemoteException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_sairActionPerformed
-
     private void JbuttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbuttonEntrarActionPerformed
         String ip = this.ipTextField.getText();
         String portoString = this.portoTextField.getText();
@@ -583,16 +586,17 @@ public class ClientFrame extends JFrame {
         }
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
 
-    private void standJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador3ActionPerformed
+    private void standJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador1ActionPerformed
+
         try {
-            cliente.stand(3);
-            standJogador3.setEnabled(false);
-            hitJogador3.setEnabled(false);
+            cliente.stand(1);
+            standJogador1.setEnabled(false);
+            hitJogador1.setEnabled(false);
 
         } catch (RemoteException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_standJogador3ActionPerformed
+    }//GEN-LAST:event_standJogador1ActionPerformed
 
     private void standJogador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador2ActionPerformed
         try {
@@ -605,18 +609,24 @@ public class ClientFrame extends JFrame {
         }
     }//GEN-LAST:event_standJogador2ActionPerformed
 
-    private void standJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador1ActionPerformed
-
+    private void standJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standJogador3ActionPerformed
         try {
-            cliente.stand(1);
-            standJogador1.setEnabled(false);
-            hitJogador1.setEnabled(false);
+            cliente.stand(3);
+            standJogador3.setEnabled(false);
+            hitJogador3.setEnabled(false);
 
         } catch (RemoteException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_standJogador3ActionPerformed
 
-    }//GEN-LAST:event_standJogador1ActionPerformed
+    private void hitJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador3ActionPerformed
+        try {
+            cliente.hit(3);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_hitJogador3ActionPerformed
 
     private void hitJogador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador1ActionPerformed
 
@@ -625,7 +635,6 @@ public class ClientFrame extends JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }//GEN-LAST:event_hitJogador1ActionPerformed
 
@@ -637,13 +646,14 @@ public class ClientFrame extends JFrame {
         }
     }//GEN-LAST:event_hitJogador2ActionPerformed
 
-    private void hitJogador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitJogador3ActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         try {
-            cliente.hit(3);
+            cliente.logout();
+            System.exit(0);
         } catch (RemoteException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_hitJogador3ActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
 
     public static void main(String args[]) {
        
@@ -665,6 +675,7 @@ public class ClientFrame extends JFrame {
     private javax.swing.JButton hitJogador2;
     private javax.swing.JButton hitJogador3;
     private javax.swing.JTextField ipTextField;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -675,11 +686,11 @@ public class ClientFrame extends JFrame {
     private javax.swing.JPanel jogador1Panel;
     private javax.swing.JPanel jogador2Panel;
     private javax.swing.JPanel jogador3Panel;
-    java.awt.Label label1;
+    private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
-    private static javax.swing.JList<String> listaJogador;
+    private javax.swing.JList<String> listaJogador;
     private javax.swing.JList<String> listaMensagem;
     private javax.swing.JTextField nomeTextField;
     private java.awt.Label pontos1;
@@ -737,7 +748,7 @@ public class ClientFrame extends JFrame {
             }
 
         }
-
+        System.out.println(lista.length - 1);
         if (salaDeObservadores) {
             listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!");
         } else {
@@ -746,7 +757,7 @@ public class ClientFrame extends JFrame {
         }
 
         jogador = lista[lista.length - 1];
-        System.out.println("projetoFinal.ClientFrame.listar() - " + jogador.getNome());
+        //System.out.println("projetoFinal.ClientFrame.listar() - " + jogador.getNome());
 
         //listaTresJogadores.add(user)
         listaTresJogadores.clear();
@@ -777,12 +788,7 @@ public class ClientFrame extends JFrame {
 
     }
 
-//      public void vezJogador(int vezJogador){
-//          this.vezJogador = vezJogador;
-//          if (vezJogador){
-//              
-//          }
-//      }
+
     public void jogar(Card[][] cartas , int[]valores,String estado) throws RemoteException {
         this.TablePanel.revalidate();
 
@@ -802,7 +808,7 @@ public class ClientFrame extends JFrame {
         System.out.println("projetoFinal.ClientFrame.jogar() - " + minhaVez + " - " + posicaoQuadro);
 
         if (minhaVez) {
-
+            System.out.println(posicaoQuadro);
             switch (posicaoQuadro) {
                 case 0:
                     hitJogador1.setEnabled(true);
@@ -821,7 +827,7 @@ public class ClientFrame extends JFrame {
 
         }
 
-        System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
+        //System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
 
         cardArray = cartas;
         int espaco = 0;
@@ -829,7 +835,7 @@ public class ClientFrame extends JFrame {
             for (int k = 0; k < cartas[i].length; k++) {
                 if (cartas[i][k] != null) {
 
-                        System.out.println(cartas[i][k].getName());
+                       // System.out.println(cartas[i][k].getName());
                     if (i == 0) {
                         cardLabel = new CardLabel();
                         card = gameDeck.deal();
@@ -909,7 +915,7 @@ public class ClientFrame extends JFrame {
 
                 break;
             case 1:
-
+               
                 listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(vezJogador).getNome());
 
                 break;
@@ -923,6 +929,28 @@ public class ClientFrame extends JFrame {
             case 5:
                 listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada");
                 break;
+                 case 6:
+                listMensagem.addElement("Rodada terminada todos os jogadores deram bust");
+                break;
+                case 7:
+                    
+                    if(vezJogador!=0){
+                        int index=vezJogador;
+                        index--;
+                listMensagem.addElement("Rodada terminada o Jogador " + listaTresJogadores.get(index).getNome()+" ganhou");
+                
+                    }else{
+                         listMensagem.addElement("Rodada terminada o dealer ganhou");
+               
+                    }
+                break;
+                case 8:
+                     listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez blackjack");
+                
+                    break;
+                case 9:
+                     // este caso serve para indicar se o jogador ainda esta online
+                    break;
             default:
                 listMensagem.addElement(codMensagem);
 
@@ -934,22 +962,35 @@ public class ClientFrame extends JFrame {
     }
 
     //guarda a posição do jogador na mesa e guarda a sua variavel a dizer se é a vez de jnogar ou não, Esses valores são diferentes para cada utilizador
-    public void setVezJogador(boolean minhaVez, int posicaoQuadro) {
-        this.minhaVez = minhaVez;
+    public void setVezJogador(boolean minhaVez1, int posicaoQuadro1) {
+        System.out.println("cheguei "+minhaVez1+" "+posicaoQuadro1);
+        minhaVez = minhaVez1;
 
-        if (this.posicaoQuadro == -999) {
-            this.posicaoQuadro = posicaoQuadro;
+        if (posicaoQuadro == -999) {
+            posicaoQuadro = posicaoQuadro1;
+        }else{
+           posicaoQuadro = posicaoQuadro1; 
         }
 
         System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
     }
 
+    
+    public void lost(){
+         JOptionPane optionPane = new JOptionPane("Voce perdeu o jogo", JOptionPane.ERROR_MESSAGE);
+            jDialog1 = optionPane.createDialog("Error");
+
+            jDialog1.setSize(300, 150);
+
+            jDialog1.setVisible(true); 
+           System.exit(0);
+    }
     public void tempo(int tempo) {
         this.tempo.setText(String.valueOf(tempo));
     }
 
     public void disableButton(int nPlayer) {
-   
+            System.out.println(nPlayer);
             switch(nPlayer){
                 case 1:
                     this.hitJogador1.setEnabled(false);

@@ -20,4 +20,5 @@ public interface InterfaceServidor extends Remote{
      public void  hit(int nPlayer)throws RemoteException;
      public void stand(int nPlayer)throws RemoteException;
      public void logout(String nome, InterfaceCliente iCliente) throws RemoteException;
+   
 }
