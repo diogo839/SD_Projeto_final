@@ -52,7 +52,7 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
 
     }
     
-    public void NewListaUsers(LoginCliente[] lista)throws RemoteException{
+    public synchronized void NewListaUsers(LoginCliente[] lista)throws RemoteException{
           
        cliFrame.listar(lista);
        
@@ -69,7 +69,7 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         return objRemoto.getJogadores();
     }
     
-    public void mensagemGeral(int codigo, int vezJogador){
+    public synchronized void mensagemGeral(int codigo, int vezJogador){
         cliFrame.mensagemGeral(codigo, vezJogador);
         
         
@@ -83,7 +83,7 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
 //    }
 
     @Override
-    public void jogar(Card[][] cartas,int[] valores,String estado) throws RemoteException {
+    public synchronized void jogar(Card[][] cartas,int[] valores,String estado) throws RemoteException {
         
     cliFrame.jogar(cartas,valores,estado);
     }
@@ -96,19 +96,19 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         objRemoto.stand(nPlayer);
     }
     
-    public void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException{
+    public  synchronized void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException{
         cliFrame.setVezJogador(minhaVez, posicaoQuadro);
     }
     
-     public void tempo(int tempo)throws RemoteException{
+     public synchronized void tempo(int tempo)throws RemoteException{
          cliFrame.tempo(tempo);
      }
     
-     public void disableButton(int nPlayer)throws RemoteException{
+     public synchronized void disableButton(int nPlayer)throws RemoteException{
         cliFrame.disableButton(nPlayer);
     }
      
-        public void lost()throws RemoteException{
+        public synchronized void lost()throws RemoteException{
         cliFrame.lost();
     }
      
