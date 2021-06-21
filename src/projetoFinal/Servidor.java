@@ -10,6 +10,7 @@ import cliente.CardLabel;
 import cliente.Deck;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.UnmarshalException;
@@ -53,16 +54,38 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
     public static void main(String[] args) {
 
         try {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Introduza o porto: ");
+            int porto = sc.nextInt();
+
             estado = "pausa";
-            // System.out.println("IP do servidor RMI: " + InetAddress.getLocalHost().getHostAddress());
+            System.out.println("IP do servidor RMI: " + InetAddress.getLocalHost().getHostAddress());
             Servidor blackjack = new Servidor();
 
             Registry reg = LocateRegistry.createRegistry(1099);
             reg.rebind("Blackjack", blackjack);
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (RemoteException | UnknownHostException re) {
+            System.out.println("Não foi possivel iniciar o servidor!!");
+        } catch (java.util.InputMismatchException IE) {
+            System.out.println("Introduza um número!!");
+            main(args);
         }
+    }
+
+    public boolean verificarNome(String nome) {
+
+        Iterator<LoginCliente> ite = listaLogin.iterator();
+
+        while (ite.hasNext()) {
+            LoginCliente obj2 = ite.next();
+            if (obj2.getNome().equalsIgnoreCase(nome)) {
+              
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -71,35 +94,42 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
         LoginCliente loginCliente;
         boolean minhaVez = false;
 
-        if (listaLogin.size() < 3) {
-            loginCliente = new LoginCliente(nome, cliente, "jogador");
-            vezJogador = 0;
+        if (verificarNome(nome)) {
+            return null;
+        } else {
 
-            if (listaLogin.isEmpty() && playing.length == 0) {
-                minhaVez = true;
-                loginCliente.setMinhaVez(minhaVez);
+            if (listaLogin.size() < 3) {
+                loginCliente = new LoginCliente(nome, cliente, "jogador");
+                vezJogador = 0;
+
+                if (listaLogin.isEmpty() && playing.length == 0) {
+                    minhaVez = true;
+                    loginCliente.setMinhaVez(minhaVez);
+                }
+
+                //System.out.println("projetoFinal.Servidor.login() - " + loginCliente.toString());
+            } else {
+                loginCliente = new LoginCliente(nome, cliente, "observador");
+
             }
 
-            //System.out.println("projetoFinal.Servidor.login() - " + loginCliente.toString());
-        } else {
-            loginCliente = new LoginCliente(nome, cliente, "observador");
+            this.listaLogin.add(loginCliente);
+            //  System.out.println("nome do utilizador: " + nome);
+            //  System.out.println("numeroo de utilizadofre: " + listaLogin.size());
+            newClientListSend();
+            //  System.out.println(estado + " " + listaLogin.size());
+            if (listaLogin.size() == 1 && estado.equalsIgnoreCase("pausa")) {
+                vezJogador = 0;
+                tempoThread = 10;
+                threadTempo();
+
+            } else if (estado.equalsIgnoreCase("jogar")) {
+                // iniciarJogo();
+            }
+            return loginCliente;
 
         }
 
-        this.listaLogin.add(loginCliente);
-        //  System.out.println("nome do utilizador: " + nome);
-        //  System.out.println("numeroo de utilizadofre: " + listaLogin.size());
-        newClientListSend();
-        //  System.out.println(estado + " " + listaLogin.size());
-        if (listaLogin.size() == 1 && estado.equalsIgnoreCase("pausa")) {
-            vezJogador = 0;
-            tempoThread = 10;
-            threadTempo();
-
-        } else if (estado.equalsIgnoreCase("jogar")) {
-            // iniciarJogo();
-        }
-        return loginCliente;
     }
 
     public synchronized LoginCliente[] getJogadores() throws RemoteException {
@@ -495,11 +525,10 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                 obj2.setMinhaVez(false);
                 obj2.getInterfaceCliente().mensagemGeral(1, vezJogador);
                 obj2.getInterfaceCliente().jogar(arrayCartas, valores, estado);
-            } catch(ConcurrentModificationException e){
+            } catch (ConcurrentModificationException e) {
                 e.printStackTrace();
                 logout(obj2.getNome(), obj2.getInterfaceCliente());
-            }
-            catch (ConnectException e) {
+            } catch (ConnectException e) {
                 e.printStackTrace();
                 logout(obj2.getNome(), obj2.getInterfaceCliente());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -514,7 +543,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
             listaLogin.get(vezJogador).getInterfaceCliente().vezJogador(true, vezJogador);
             listaLogin.get(vezJogador).getInterfaceCliente().jogar(arrayCartas, valores, estado);
             listaLogin.get(vezJogador).setMinhaVez(true);
-            if (valores[vezJogador] == 21 && vezJogador !=0) {
+            if (valores[vezJogador] == 21 && vezJogador != 0) {
                 stand(nPlayer);
                 listaLogin.get(vezJogador).getInterfaceCliente().mensagemGeral(8, vezJogador);
 
@@ -671,33 +700,31 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                         while (ite.hasNext()) {
                                             LoginCliente obj2 = ite.next();
                                             System.out.println(playing[flag].getNome());
-                                            if(obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())){
+                                            if (obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())) {
                                                 System.out.println(playing[flag].getNome());
-                                            try {
-                                                obj2.getInterfaceCliente().disableButton(1);
-                                                obj2.getInterfaceCliente().disableButton(2);
-                                                obj2.getInterfaceCliente().disableButton(3);
-                                                
-                                                
-                                                obj2.setFichas(obj2.getFichas() - 2);
-                                                
-                                                
-                                                
-                                                if (obj2.getFichas() <= 0 && obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())) {
-                                                    obj2.getInterfaceCliente().lost();
-                                                    logout(obj2.getNome(), obj2.getInterfaceCliente());
-                                                    if (listaLogin.isEmpty()) {
-                                                        estado = "waiting";
+                                                try {
+                                                    obj2.getInterfaceCliente().disableButton(1);
+                                                    obj2.getInterfaceCliente().disableButton(2);
+                                                    obj2.getInterfaceCliente().disableButton(3);
+
+                                                    obj2.setFichas(obj2.getFichas() - 2);
+
+                                                    if (obj2.getFichas() <= 0 && obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())) {
+                                                        obj2.getInterfaceCliente().lost();
+                                                        logout(obj2.getNome(), obj2.getInterfaceCliente());
+                                                        if (listaLogin.isEmpty()) {
+                                                            estado = "waiting";
+                                                        }
                                                     }
+
+                                                } catch (UnmarshalException ex) {
+                                                    estado = "waiting";
+                                                } catch (Exception ex) {
+                                                    ex.printStackTrace();
+                                                    logout(obj2.getNome(), obj2.getInterfaceCliente());
+
                                                 }
-
-                                            } catch (UnmarshalException ex) {
-                                                estado = "waiting";
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                                logout(obj2.getNome(), obj2.getInterfaceCliente());
-
-                                            }}
+                                            }
                                             flag++;
                                         }
 
@@ -707,7 +734,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                             LoginCliente obj2 = ite.next();
 
                                             try {
-                                                
+
                                                 obj2.setFichas(obj2.getFichas() - 2);
                                                 if (obj2.getFichas() <= 0 && obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())) {
                                                     obj2.getInterfaceCliente().lost();
