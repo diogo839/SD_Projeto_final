@@ -8,6 +8,7 @@ import java.awt.Label;
 import javax.swing.*;
 import java.awt.event.*;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class ClientFrame extends JFrame {
     public ClientFrame() {
 
         initComponents();
-        
+
         lista = new Vector<LoginCliente>();
         this.LoginPanel.setVisible(true);
         this.TablePanel.setVisible(false);
@@ -97,6 +98,7 @@ public class ClientFrame extends JFrame {
         textField2 = new java.awt.TextField();
         label4 = new java.awt.Label();
         jDialog1 = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
         TablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaJogador = new javax.swing.JList<>();
@@ -107,7 +109,6 @@ public class ClientFrame extends JFrame {
         jLabel4 = new javax.swing.JLabel();
         JScrollPane2 = new javax.swing.JScrollPane();
         listaMensagem = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
         hitJogador2 = new javax.swing.JButton();
         hitJogador1 = new javax.swing.JButton();
         hitJogador3 = new javax.swing.JButton();
@@ -127,6 +128,12 @@ public class ClientFrame extends JFrame {
         pontosRodada3 = new java.awt.Label();
         dealerPannel = new javax.swing.JPanel();
         PontosRodadaServer = new java.awt.Label();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         LoginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -152,6 +159,8 @@ public class ClientFrame extends JFrame {
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        jLabel5.setText("Mensagens");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Card Game GUI");
@@ -181,8 +190,6 @@ public class ClientFrame extends JFrame {
         jLabel4.setText("Observadores");
 
         JScrollPane2.setViewportView(listaMensagem);
-
-        jLabel5.setText("Mensagens");
 
         hitJogador2.setText("Hit");
         hitJogador2.setEnabled(false);
@@ -240,6 +247,8 @@ public class ClientFrame extends JFrame {
 
         jLabel6.setText("Tempo: ");
 
+        jogador1Panel.setBackground(new java.awt.Color(0, 153, 0));
+
         javax.swing.GroupLayout jogador1PanelLayout = new javax.swing.GroupLayout(jogador1Panel);
         jogador1Panel.setLayout(jogador1PanelLayout);
         jogador1PanelLayout.setHorizontalGroup(
@@ -248,10 +257,11 @@ public class ClientFrame extends JFrame {
         );
         jogador1PanelLayout.setVerticalGroup(
             jogador1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jogador2Panel.setPreferredSize(new java.awt.Dimension(250, 170));
+        jogador2Panel.setBackground(new java.awt.Color(0, 153, 0));
+        jogador2Panel.setPreferredSize(new java.awt.Dimension(250, 100));
 
         javax.swing.GroupLayout jogador2PanelLayout = new javax.swing.GroupLayout(jogador2Panel);
         jogador2Panel.setLayout(jogador2PanelLayout);
@@ -261,10 +271,11 @@ public class ClientFrame extends JFrame {
         );
         jogador2PanelLayout.setVerticalGroup(
             jogador2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jogador3Panel.setPreferredSize(new java.awt.Dimension(250, 170));
+        jogador3Panel.setBackground(new java.awt.Color(0, 153, 0));
+        jogador3Panel.setPreferredSize(new java.awt.Dimension(250, 100));
 
         javax.swing.GroupLayout jogador3PanelLayout = new javax.swing.GroupLayout(jogador3Panel);
         jogador3Panel.setLayout(jogador3PanelLayout);
@@ -274,7 +285,7 @@ public class ClientFrame extends JFrame {
         );
         jogador3PanelLayout.setVerticalGroup(
             jogador3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         pontosRodada1.setText("");
@@ -282,6 +293,8 @@ public class ClientFrame extends JFrame {
         pontosRodada2.setText("");
 
         pontosRodada3.setText("");
+
+        dealerPannel.setBackground(new java.awt.Color(0, 153, 0));
 
         javax.swing.GroupLayout dealerPannelLayout = new javax.swing.GroupLayout(dealerPannel);
         dealerPannel.setLayout(dealerPannelLayout);
@@ -296,17 +309,117 @@ public class ClientFrame extends JFrame {
 
         PontosRodadaServer.setText("");
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Fichas: ");
+        jLabel7.setPreferredSize(new java.awt.Dimension(43, 20));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Fichas:");
+        jLabel8.setPreferredSize(new java.awt.Dimension(40, 20));
+
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Fichas:");
+        jLabel9.setPreferredSize(new java.awt.Dimension(40, 20));
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Pontos:");
+        jLabel10.setPreferredSize(new java.awt.Dimension(43, 20));
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Pontos:");
+        jLabel11.setPreferredSize(new java.awt.Dimension(43, 20));
+
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Pontos:");
+        jLabel12.setPreferredSize(new java.awt.Dimension(43, 20));
+
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
         TablePanelLayout.setHorizontalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(75, 75, 75))
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGap(352, 352, 352)
+                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TablePanelLayout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hitJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(standJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pontosRodada3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(90, 90, 90))))))
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tempo))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(TablePanelLayout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(TablePanelLayout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jogador1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(pontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(pontosRodada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(65, 65, 65)))
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(pontosRodada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(91, 91, 91))
+                                    .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(dealerPannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jogador2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tempo)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(TablePanelLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(hitJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,65 +432,9 @@ public class ClientFrame extends JFrame {
                             .addComponent(standJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jogador1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dealerPannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jogador2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(265, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(75, 75, 75))
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pontosRodada1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pontos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(177, 177, 177)
-                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hitJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(standJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 329, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pontosRodada3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(TablePanelLayout.createSequentialGroup()
-                                        .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(179, 179, 179)
-                                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(JScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                                .addGap(36, 36, 36))))
-                    .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addComponent(pontosRodada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablePanelLayout.createSequentialGroup()
-                .addGap(393, 393, 393)
-                .addComponent(PontosRodadaServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(80, 80, 80))
+                        .addGap(393, 393, 393)
+                        .addComponent(PontosRodadaServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,15 +444,16 @@ public class ClientFrame extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(tempo)))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(TablePanelLayout.createSequentialGroup()
+                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(tempo))
+                                .addGap(113, 113, 113))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(JScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
                     .addGroup(TablePanelLayout.createSequentialGroup()
                         .addComponent(PontosRodadaServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -403,44 +461,47 @@ public class ClientFrame extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jogador2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jogador1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jogador3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jogador1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pontos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TablePanelLayout.createSequentialGroup()
                         .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pontosRodada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pontosRodada3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(hitJogador1)
-                                    .addComponent(standJogador1))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(TablePanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(hitJogador2)
-                                    .addComponent(standJogador2)
-                                    .addComponent(hitJogador3)
-                                    .addComponent(standJogador3))
-                                .addGap(25, 25, 25))))
+                            .addComponent(pontosRodada3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hitJogador2)
+                            .addComponent(standJogador2)
+                            .addComponent(hitJogador3)
+                            .addComponent(standJogador3))
+                        .addGap(25, 25, 25))
                     .addGroup(TablePanelLayout.createSequentialGroup()
-                        .addComponent(pontosRodada1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pontosRodada1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hitJogador1)
+                            .addComponent(standJogador1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         getContentPane().add(TablePanel, "card2");
@@ -480,7 +541,7 @@ public class ClientFrame extends JFrame {
                     .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGap(343, 343, 343)
                         .addComponent(JbuttonEntrar)))
-                .addContainerGap(639, Short.MAX_VALUE))
+                .addContainerGap(671, Short.MAX_VALUE))
         );
         LoginPanelLayout.setVerticalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +560,7 @@ public class ClientFrame extends JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(JbuttonEntrar)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         getContentPane().add(LoginPanel, "card3");
@@ -512,7 +573,7 @@ public class ClientFrame extends JFrame {
         String ip = this.ipTextField.getText();
         String portoString = this.portoTextField.getText();
         String nome = this.nomeTextField.getText();
-       
+
         boolean entrar = true;
         int porto = 0;
 
@@ -578,10 +639,17 @@ public class ClientFrame extends JFrame {
 
         if (entrar) {
 
-            cliente.login(nome, ip, porto);
-
-            this.LoginPanel.setVisible(false);
-            this.TablePanel.setVisible(true);
+            int login = cliente.login(nome, ip, porto);
+            
+            if (login == 1) {
+                this.LoginPanel.setVisible(false);
+                this.TablePanel.setVisible(true);
+            }else if(login == -1){
+                 mensagemErro("Não foi possível conectar-se||");
+            }else if(login == 0){
+                 mensagemErro("O nome que introduzio já está a ser utilizado!!");
+            }
+         
 
         }
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
@@ -656,7 +724,7 @@ public class ClientFrame extends JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ClientFrame().setVisible(true);
@@ -677,20 +745,26 @@ public class ClientFrame extends JFrame {
     private javax.swing.JTextField ipTextField;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jogador1Panel;
     private javax.swing.JPanel jogador2Panel;
     private javax.swing.JPanel jogador3Panel;
-    private java.awt.Label label1;
+    java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
-    private javax.swing.JList<String> listaJogador;
+    private static javax.swing.JList<String> listaJogador;
     private javax.swing.JList<String> listaMensagem;
     private javax.swing.JTextField nomeTextField;
     private java.awt.Label pontos1;
@@ -750,9 +824,12 @@ public class ClientFrame extends JFrame {
         }
         System.out.println(lista.length - 1);
         if (salaDeObservadores) {
-            listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!");
+            
+            listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!"
+                  + "<br/>-----------------------------------------------------<br/></html>");
         } else {
-            listMensagem.addElement("O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!");
+            listMensagem.addElement("<html>"+dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!"
+                   + "<br/>-----------------------------------------------------<br/></html>");
 
         }
 
@@ -788,8 +865,7 @@ public class ClientFrame extends JFrame {
 
     }
 
-
-    public void jogar(Card[][] cartas , int[]valores,String estado) throws RemoteException {
+    public void jogar(Card[][] cartas, int[] valores, String estado) throws RemoteException {
         this.TablePanel.revalidate();
 
         this.TablePanel.repaint();
@@ -828,47 +904,44 @@ public class ClientFrame extends JFrame {
         }
 
         //System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
-
         cardArray = cartas;
         int espaco = 0;
         for (int i = 0; i < cartas.length; i++) {
             for (int k = 0; k < cartas[i].length; k++) {
                 if (cartas[i][k] != null) {
 
-                       // System.out.println(cartas[i][k].getName());
+                    // System.out.println(cartas[i][k].getName());
                     if (i == 0) {
                         cardLabel = new CardLabel();
                         card = gameDeck.deal();
                         if (k == 0) {
-                            if(!estado.equals("server") && !estado.equals("startNewGame")){
-                            cardLabel.setCardImage("bv");
-                            }else{
-                               cardLabel.setCardImage(cartas[i][k].getName()); 
-                               if(estado.equals("server") || estado.equals("startNewGame")){
-                               this.PontosRodadaServer.setText(String.valueOf(valores[0]));
-                               }else{
-                                this.PontosRodadaServer.setText("");
-                               }
+                            if (!estado.equals("server") && !estado.equals("startNewGame")) {
+                                cardLabel.setCardImage("bv");
+                            } else {
+                                cardLabel.setCardImage(cartas[i][k].getName());
+                                if (estado.equals("server") || estado.equals("startNewGame")) {
+                                    this.PontosRodadaServer.setText(String.valueOf(valores[0]));
+                                } else {
+                                    this.PontosRodadaServer.setText("");
+                                }
                             }
                             cardLabel.setCardCovered(false);
                             cardLabel.setLocation(0, 0);
                             this.dealerPannel.add(cardLabel);
-                            
-                            
+
                         } else {
-                        
+
                             cardLabel.setCardImage(cartas[i][k].getName());
                             cardLabel.setCardCovered(false);
-                            cardLabel.setLocation( k * 20, 0);
-                                this.dealerPannel.add(cardLabel);
-                                if(estado.equals("server") || estado.equals("startNewGame")){
-                                    this.PontosRodadaServer.setText(String.valueOf(valores[0]));
-                                 }else{
+                            cardLabel.setLocation(k * 20, 0);
+                            this.dealerPannel.add(cardLabel);
+                            if (estado.equals("server") || estado.equals("startNewGame")) {
+                                this.PontosRodadaServer.setText(String.valueOf(valores[0]));
+                            } else {
                                 this.PontosRodadaServer.setText("");
-                               }
-                        
+                            }
+
                         }
-                        
 
                     } else {
 
@@ -887,12 +960,12 @@ public class ClientFrame extends JFrame {
 
                             this.jogador2Panel.add(cardLabel);
                             this.pontosRodada2.setText(String.valueOf(valores[2]));
-                           
+
                         } else if (i == 3) {
-                           
+
                             this.jogador3Panel.add(cardLabel);
-                             this.pontosRodada3.setText(String.valueOf(valores[3]));
-                            
+                            this.pontosRodada3.setText(String.valueOf(valores[3]));
+
                         }
 
                     }
@@ -905,52 +978,61 @@ public class ClientFrame extends JFrame {
 
     }
 
-    
     public void mensagemGeral(int codMensagem, int vezJogador) {
 
         switch (codMensagem) {
             case 0:
 
-                listMensagem.addElement("Faltam 5 segundos para o jogo começar");
+                listMensagem.addElement("<html>"+ dataActual() + " - Faltam 5 segundos para o jogo começar"
+                     + "<br/>-----------------------------------------------------<br/></html>");
 
                 break;
             case 1:
-               
-                listMensagem.addElement("Vez do jogador " + listaTresJogadores.get(vezJogador).getNome());
+
+                listMensagem.addElement("<html>"+ dataActual() + " - Vez do jogador " + listaTresJogadores.get(vezJogador).getNome()
+                + "<br/>-----------------------------------------------------<br/></html>");
 
                 break;
             case 2:
-                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " deu Hit");
+                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " deu Hit"
+                       + "<br/>-----------------------------------------------------<br/></html>");
                 break;
             case 3:
-                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez Stand");
+                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez Stand"
+                      + "<br/>-----------------------------------------------------<br/></html>");
             case 4:
-                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 10 segundos para fazer a jogada");
+                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 10 segundos para fazer a jogada"
+                      + "<br/>-----------------------------------------------------<br/></html>");
             case 5:
-                listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada");
+                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada"
+                     + "<br/>-----------------------------------------------------<br/></html>");
                 break;
-                 case 6:
-                listMensagem.addElement("Rodada terminada todos os jogadores deram bust");
+            case 6:
+                listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada todos os jogadores deram bust"
+                       + "<br/>-----------------------------------------------------<br/></html>");
                 break;
-                case 7:
-                    
-                    if(vezJogador!=0){
-                        int index=vezJogador;
-                        index--;
-                listMensagem.addElement("Rodada terminada o Jogador " + listaTresJogadores.get(index).getNome()+" ganhou");
-                
-                    }else{
-                         listMensagem.addElement("Rodada terminada o dealer ganhou");
-               
-                    }
+            case 7:
+
+                if (vezJogador != 0) {
+                    int index = vezJogador;
+                    index--;
+                    listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada o Jogador " + listaTresJogadores.get(index).getNome() + " ganhou"
+                          + "<br/>-----------------------------------------------------<br/></html>");
+
+                } else {
+                    listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada o dealer ganhou"
+                         + "<br/>-----------------------------------------------------<br/></html>");
+
+                }
                 break;
-                case 8:
-                     listMensagem.addElement("O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez blackjack");
-                
-                    break;
-                case 9:
-                     // este caso serve para indicar se o jogador ainda esta online
-                    break;
+            case 8:
+                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez blackjack"
+                       + "<br/>-----------------------------------------------------<br/></html>");
+
+                break;
+            case 9:
+                // este caso serve para indicar se o jogador ainda esta online
+                break;
             default:
                 listMensagem.addElement(codMensagem);
 
@@ -963,50 +1045,56 @@ public class ClientFrame extends JFrame {
 
     //guarda a posição do jogador na mesa e guarda a sua variavel a dizer se é a vez de jnogar ou não, Esses valores são diferentes para cada utilizador
     public void setVezJogador(boolean minhaVez1, int posicaoQuadro1) {
-        System.out.println("cheguei "+minhaVez1+" "+posicaoQuadro1);
+       
         minhaVez = minhaVez1;
 
         if (posicaoQuadro == -999) {
             posicaoQuadro = posicaoQuadro1;
-        }else{
-           posicaoQuadro = posicaoQuadro1; 
+        } else {
+            posicaoQuadro = posicaoQuadro1;
         }
 
         System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
     }
 
-    
-    public void lost(){
-         JOptionPane optionPane = new JOptionPane("Voce perdeu o jogo", JOptionPane.ERROR_MESSAGE);
-            jDialog1 = optionPane.createDialog("Error");
+    public void lost() {
+        JOptionPane optionPane = new JOptionPane("Voce perdeu o jogo", JOptionPane.ERROR_MESSAGE);
+        jDialog1 = optionPane.createDialog("Error");
 
-            jDialog1.setSize(300, 150);
+        jDialog1.setSize(300, 150);
 
-            jDialog1.setVisible(true); 
-           System.exit(0);
+        jDialog1.setVisible(true);
+        System.exit(0);
     }
+
     public void tempo(int tempo) {
         this.tempo.setText(String.valueOf(tempo));
     }
 
     public void disableButton(int nPlayer) {
-            System.out.println(nPlayer);
-            switch(nPlayer){
-                case 1:
-                    this.hitJogador1.setEnabled(false);
-                    this.standJogador1.setEnabled(false);
-                    break;
-                 case 2:
-                    this.hitJogador2.setEnabled(false);
-                    this.standJogador2.setEnabled(false);
-                    break;
-                    
-                 case 3:
-                    this.hitJogador3.setEnabled(false);
-                    this.standJogador3.setEnabled(false);
-                    break;
-            }
+        System.out.println(nPlayer);
+        switch (nPlayer) {
+            case 1:
+                this.hitJogador1.setEnabled(false);
+                this.standJogador1.setEnabled(false);
+                break;
+            case 2:
+                this.hitJogador2.setEnabled(false);
+                this.standJogador2.setEnabled(false);
+                break;
+
+            case 3:
+                this.hitJogador3.setEnabled(false);
+                this.standJogador3.setEnabled(false);
+                break;
+        }
+
+    }
     
+    public String dataActual(){
+        Date data = new Date(); 
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(data);
     }
 
 }

@@ -31,7 +31,7 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         super();
     }
     
-    public  InterfaceServidor login(String nome, String ip, int porto) {
+    public int login(String nome, String ip, int porto) {
 
         try {
               String url = "//" + ip + ":"+porto+"/" + "Blackjack";
@@ -40,12 +40,16 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
        // Cliente cliente = new Cliente(cliFrame);
         
         user=objRemoto.login(nome, this);
-       
-               
-        return objRemoto;
+        
+            if (user != null) {
+                return 1; 
+            }else{
+                return 0;
+            }
+      
             
         } catch (Exception e) {
-            return null;
+            return -1;
         }
         
       
