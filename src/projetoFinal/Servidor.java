@@ -670,7 +670,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                         int flag = 0;
                                         while (ite.hasNext()) {
                                             LoginCliente obj2 = ite.next();
-                                            System.out.println(playing[flag].getNome());
+                                          
                                             if(obj2.getInterfaceCliente().equals(playing[flag].getInterfaceCliente())){
                                                 System.out.println(playing[flag].getNome());
                                             try {
@@ -750,7 +750,7 @@ public class Servidor extends UnicastRemoteObject implements InterfaceServidor {
                                 numJogadoresTable = 0;
                                 arrayCartas = new Card[4][2];
                                 valores = new int[4];
-                                tempoThread = 20;
+                                tempoThread = 10;
                                 listaLogin.get(0).getInterfaceCliente().vezJogador(true, 0);
                                 estado = "pausa";
 
