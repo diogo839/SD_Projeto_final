@@ -906,7 +906,9 @@ public class ClientFrame extends JFrame {
         //System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
         cardArray = cartas;
         int espaco = 0;
+        int space=0;
         for (int i = 0; i < cartas.length; i++) {
+            space=0;
             for (int k = 0; k < cartas[i].length; k++) {
                 if (cartas[i][k] != null) {
 
@@ -931,15 +933,19 @@ public class ClientFrame extends JFrame {
 
                         } else {
 
+                            if(k==1){
+                                space++;
+                            }
                             cardLabel.setCardImage(cartas[i][k].getName());
                             cardLabel.setCardCovered(false);
-                            cardLabel.setLocation(k * 20, 0);
+                            cardLabel.setLocation(space * 20, 0);
                             this.dealerPannel.add(cardLabel);
                             if (estado.equals("server") || estado.equals("startNewGame")) {
                                 this.PontosRodadaServer.setText(String.valueOf(valores[0]));
                             } else {
                                 this.PontosRodadaServer.setText("");
                             }
+                            space++;
 
                         }
 
@@ -949,7 +955,7 @@ public class ClientFrame extends JFrame {
                         card = gameDeck.deal();
                         cardLabel.setCardImage(cartas[i][k].getName());
                         cardLabel.setCardCovered(false);
-                        cardLabel.setLocation(k * 20, 0);
+                        cardLabel.setLocation(space* 20, 0);
 
                         if (i == 1) {
 
@@ -967,11 +973,11 @@ public class ClientFrame extends JFrame {
                             this.pontosRodada3.setText(String.valueOf(valores[3]));
 
                         }
-
+                            space++;
                     }
 
                 }
-
+                    
             }
         }
         repaint();
@@ -979,7 +985,7 @@ public class ClientFrame extends JFrame {
     }
 
     public void mensagemGeral(int codMensagem, int vezJogador) {
-
+        try{
         switch (codMensagem) {
             case 0:
 
@@ -1036,6 +1042,9 @@ public class ClientFrame extends JFrame {
             default:
                 listMensagem.addElement(codMensagem);
 
+        }
+        }catch( ArrayIndexOutOfBoundsException e){
+            
         }
 
         this.vezJogador = vezJogador;
