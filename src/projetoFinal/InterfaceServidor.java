@@ -17,7 +17,7 @@ public interface InterfaceServidor extends Remote{
     
      public LoginCliente login(String nome, InterfaceCliente clinte) throws RemoteException;
      public LoginCliente[] getJogadores()throws RemoteException;
-      public void  hit(int nPlayer)throws RemoteException;
-      public void stand(int nPlayer)throws RemoteException;
+      public void  hit(int nPlayer, boolean sendMensage)throws RemoteException;
+      public void stand(int nPlayer, boolean blackjack)throws RemoteException;
      public void logout(String nome, InterfaceCliente iCliente) throws RemoteException;
  }
