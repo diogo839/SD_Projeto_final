@@ -10,6 +10,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Vector;
 
 /**
@@ -57,7 +58,8 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     }
     
     public synchronized void NewListaUsers(LoginCliente[] lista)throws RemoteException{
-          
+        
+        
        cliFrame.listar(lista);
        
         
@@ -73,8 +75,9 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
         return objRemoto.getJogadores();
     }
     
-    public synchronized void mensagemGeral(int codigo, int vezJogador){
-        cliFrame.mensagemGeral(codigo, vezJogador);
+    public synchronized void mensagemGeral(int codigo, int vezJogador, String nome, Date date){
+       
+        cliFrame.mensagemGeral(codigo, vezJogador, nome, date);
         
         
     }
@@ -93,11 +96,11 @@ public class Cliente extends UnicastRemoteObject implements InterfaceCliente{
     }
     
     public void hit(int nPlayer)throws RemoteException{
-        objRemoto.hit(nPlayer);
+        objRemoto.hit(nPlayer, true);
     }
     
     public void stand(int nPlayer)throws RemoteException{
-        objRemoto.stand(nPlayer);
+        objRemoto.stand(nPlayer, false);
     }
     
     public  synchronized void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException{

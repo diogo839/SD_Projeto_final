@@ -8,6 +8,7 @@ package projetoFinal;
 import cliente.Card;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface InterfaceCliente extends Remote{
     
     public void NewListaUsers(LoginCliente[] lista)throws RemoteException;
     public void jogar(Card[][] cartas, int []valores,String estado)throws RemoteException;
-      public void mensagemGeral(int codigo, int vezJogador)throws RemoteException;
+      public void mensagemGeral(int codigo, int vezJogador, String nome, Date date)throws RemoteException;
       public void vezJogador(boolean minhaVez, int posicaoQuadro)throws RemoteException;
        public void tempo(int tempo)throws RemoteException;
         public void disableButton(int nPlayer)throws RemoteException;

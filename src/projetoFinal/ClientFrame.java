@@ -640,16 +640,15 @@ public class ClientFrame extends JFrame {
         if (entrar) {
 
             int login = cliente.login(nome, ip, porto);
-            
+
             if (login == 1) {
                 this.LoginPanel.setVisible(false);
                 this.TablePanel.setVisible(true);
-            }else if(login == -1){
-                 mensagemErro("Não foi possível conectar-se||");
-            }else if(login == 0){
-                 mensagemErro("O nome que introduzio já está a ser utilizado!!");
+            } else if (login == -1) {
+                mensagemErro("Não foi possível conectar-se||");
+            } else if (login == 0) {
+                mensagemErro("O nome que introduzio já está a ser utilizado!!");
             }
-         
 
         }
     }//GEN-LAST:event_JbuttonEntrarActionPerformed
@@ -822,16 +821,16 @@ public class ClientFrame extends JFrame {
             }
 
         }
-        System.out.println(lista.length - 1);
-        if (salaDeObservadores) {
-            
-            listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!"
-                  + "<br/>-----------------------------------------------------<br/></html>");
-        } else {
-            listMensagem.addElement("<html>"+dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!"
-                   + "<br/>-----------------------------------------------------<br/></html>");
-
-        }
+//        System.out.println("projetoFinal.ClientFrame.listar() - ");
+//        if (salaDeObservadores) {
+//            
+//            listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou na sala de observadores!!"
+//                  + "<br/>-----------------------------------------------------<br/></html>");
+//        } else {
+//            listMensagem.addElement("<html>"+dataActual() + " - O jogador " + lista[lista.length - 1].getNome() + " entrou no jogo!!"
+//                   + "<br/>-----------------------------------------------------<br/></html>");
+//
+//        }
 
         jogador = lista[lista.length - 1];
         //System.out.println("projetoFinal.ClientFrame.listar() - " + jogador.getNome());
@@ -859,7 +858,9 @@ public class ClientFrame extends JFrame {
 //            vezJogador = 0;
         }
 
-        listaMensagem.setModel(listMensagem);
+        System.out.println("projetoFinal.ClientFrame.listar() - MENSAGENS");
+
+        //listaMensagem.setModel(listMensagem);
         listaJogador.setModel(listModel);
         repaint();
 
@@ -881,10 +882,9 @@ public class ClientFrame extends JFrame {
         hitJogador3.setEnabled(false);
         standJogador3.setEnabled(false);
 
-        System.out.println("projetoFinal.ClientFrame.jogar() - " + minhaVez + " - " + posicaoQuadro);
-
+        // System.out.println("projetoFinal.ClientFrame.jogar() - " + minhaVez + " - " + posicaoQuadro);
         if (minhaVez) {
-            System.out.println(posicaoQuadro);
+            // System.out.println(posicaoQuadro);
             switch (posicaoQuadro) {
                 case 0:
                     hitJogador1.setEnabled(true);
@@ -906,9 +906,9 @@ public class ClientFrame extends JFrame {
         //System.out.println("projetoFinal.ClientFrame.jogar() - " + cartas.length);
         cardArray = cartas;
         int espaco = 0;
-        int space=0;
+        int space = 0;
         for (int i = 0; i < cartas.length; i++) {
-            space=0;
+            space = 0;
             for (int k = 0; k < cartas[i].length; k++) {
                 if (cartas[i][k] != null) {
 
@@ -933,7 +933,7 @@ public class ClientFrame extends JFrame {
 
                         } else {
 
-                            if(k==1){
+                            if (k == 1) {
                                 space++;
                             }
                             cardLabel.setCardImage(cartas[i][k].getName());
@@ -955,7 +955,7 @@ public class ClientFrame extends JFrame {
                         card = gameDeck.deal();
                         cardLabel.setCardImage(cartas[i][k].getName());
                         cardLabel.setCardCovered(false);
-                        cardLabel.setLocation(space* 20, 0);
+                        cardLabel.setLocation(space * 20, 0);
 
                         if (i == 1) {
 
@@ -973,78 +973,99 @@ public class ClientFrame extends JFrame {
                             this.pontosRodada3.setText(String.valueOf(valores[3]));
 
                         }
-                            space++;
+                        space++;
                     }
 
                 }
-                    
+
             }
         }
         repaint();
 
     }
 
-    public void mensagemGeral(int codMensagem, int vezJogador) {
-        try{
-        switch (codMensagem) {
-            case 0:
+    public void mensagemGeral(int codMensagem, int vezJogador, String nome, Date date) {
 
-                listMensagem.addElement("<html>"+ dataActual() + " - Faltam 5 segundos para o jogo começar"
-                     + "<br/>-----------------------------------------------------<br/></html>");
+        Date data = date;
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        String dataActual = format.format(data);
 
-                break;
-            case 1:
+        System.out.println("projetoFinal.ClientFrame.mensagemGeral() - " + codMensagem);
+        try {
+            switch (codMensagem) {
+                case 0:
 
-                listMensagem.addElement("<html>"+ dataActual() + " - Vez do jogador " + listaTresJogadores.get(vezJogador).getNome()
-                + "<br/>-----------------------------------------------------<br/></html>");
+                    listMensagem.addElement("<html>" + dataActual + " - Faltam 5 segundos para o jogo começar"
+                            + "<br/>-----------------------------------------------------<br/></html>");
 
-                break;
-            case 2:
-                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " deu Hit"
-                       + "<br/>-----------------------------------------------------<br/></html>");
-                break;
-            case 3:
-                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez Stand"
-                      + "<br/>-----------------------------------------------------<br/></html>");
-            case 4:
-                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 10 segundos para fazer a jogada"
-                      + "<br/>-----------------------------------------------------<br/></html>");
-            case 5:
-                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada"
-                     + "<br/>-----------------------------------------------------<br/></html>");
-                break;
-            case 6:
-                listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada todos os jogadores deram bust"
-                       + "<br/>-----------------------------------------------------<br/></html>");
-                break;
-            case 7:
+                    break;
+                case 1:
 
-                if (vezJogador != 0) {
-                    int index = vezJogador;
-                    index--;
-                    listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada o Jogador " + listaTresJogadores.get(index).getNome() + " ganhou"
-                          + "<br/>-----------------------------------------------------<br/></html>");
+                    listMensagem.addElement("<html>" + dataActual + " - Vez do jogador " + listaTresJogadores.get(vezJogador).getNome()
+                            + "<br/>-----------------------------------------------------<br/></html>");
 
-                } else {
-                    listMensagem.addElement("<html>"+ dataActual() + " - Rodada terminada o dealer ganhou"
-                         + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 2:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " deu Hit"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 3:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez Stand"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 4:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 10 segundos para fazer a jogada"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 5:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " tem mais 5 segundos para fazer a jogada"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 6:
+                    listMensagem.addElement("<html>" + dataActual + " - Rodada terminada todos os jogadores deram bust"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 7:
 
-                }
-                break;
-            case 8:
-                listMensagem.addElement("<html>"+ dataActual() + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez blackjack"
-                       + "<br/>-----------------------------------------------------<br/></html>");
+                    if (vezJogador != 0) {
+                        int index = vezJogador;
+                        index--;
+                        listMensagem.addElement("<html>" + dataActual + " - Rodada terminada o Jogador " + listaTresJogadores.get(index).getNome() + " ganhou"
+                                + "<br/>-----------------------------------------------------<br/></html>");
 
-                break;
-            case 9:
-                // este caso serve para indicar se o jogador ainda esta online
-                break;
-            default:
-                listMensagem.addElement(codMensagem);
+                    } else {
+                        listMensagem.addElement("<html>" + dataActual + " - Rodada terminada o dealer ganhou"
+                                + "<br/>-----------------------------------------------------<br/></html>");
 
-        }
-        }catch( ArrayIndexOutOfBoundsException e){
-            
+                    }
+                    break;
+                case 8:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + listaTresJogadores.get(vezJogador).getNome() + " fez blackjack"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+
+                    break;
+                case 9:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + nome + " saiu do jogo"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+
+                    break;
+                case 10:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + nome + " entrou no jogo"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 11:
+                    listMensagem.addElement("<html>" + dataActual + " - O jogador " + nome + " entrou na sala de observadores!!"
+                            + "<br/>-----------------------------------------------------<br/></html>");
+                    break;
+                case 12:
+                    // este caso serve para indicar se o jogador ainda esta online
+                    break;
+                default:
+                    //listMensagem.addElement(codMensagem);
+
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+
         }
 
         this.vezJogador = vezJogador;
@@ -1054,7 +1075,7 @@ public class ClientFrame extends JFrame {
 
     //guarda a posição do jogador na mesa e guarda a sua variavel a dizer se é a vez de jnogar ou não, Esses valores são diferentes para cada utilizador
     public void setVezJogador(boolean minhaVez1, int posicaoQuadro1) {
-       
+
         minhaVez = minhaVez1;
 
         if (posicaoQuadro == -999) {
@@ -1063,7 +1084,7 @@ public class ClientFrame extends JFrame {
             posicaoQuadro = posicaoQuadro1;
         }
 
-        System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
+//        System.out.println("projetoFinal.ClientFrame.login() - " + minhaVez + " - " + posicaoQuadro);
     }
 
     public void lost() {
@@ -1081,7 +1102,7 @@ public class ClientFrame extends JFrame {
     }
 
     public void disableButton(int nPlayer) {
-        System.out.println(nPlayer);
+
         switch (nPlayer) {
             case 1:
                 this.hitJogador1.setEnabled(false);
@@ -1099,11 +1120,10 @@ public class ClientFrame extends JFrame {
         }
 
     }
-    
-    public String dataActual(){
-        Date data = new Date(); 
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        return format.format(data);
-    }
 
+//    public String dataActual(){
+//        Date data = new Date(); 
+//        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+//        return format.format(data);
+//    }
 }
